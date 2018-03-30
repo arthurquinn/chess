@@ -23,6 +23,14 @@ public:
     Board() = default;
     virtual ~Board() = default;
 
+    // Disable copy (we contain unique pointers -- implement deep copy if this is wanted in the future)
+    Board(const Board& copy) = delete;
+    Board& operator=(const Board& copy) = delete;
+
+    // Disable move (this can be added later)
+    Board(Board&& move) = delete;
+    Board& operator=(Board&& move) = delete;
+
     const BoardData& at(const int x, const int y) const;
     const BoardData& at(const Location location) const;
 };
