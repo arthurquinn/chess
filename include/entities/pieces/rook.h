@@ -1,7 +1,7 @@
 #ifndef __ROOK_H
 #define __ROOK_H
 
-#include "pieces/base_piece.h"
+#include "entities/pieces/base_piece.h"
 
 class Rook : public BasePiece {
 private:

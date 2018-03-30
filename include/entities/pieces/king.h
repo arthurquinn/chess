@@ -1,7 +1,7 @@
 #ifndef __KING_H
 #define __KING_H
 
-#include "pieces/base_piece.h"
+#include "entities/pieces/base_piece.h"
 
 class King : public BasePiece {
 private:

@@ -1,7 +1,7 @@
 #ifndef __PAWN_H
 #define __PAWN_H
 
-#include "pieces/base_piece.h"
+#include "entities/pieces/base_piece.h"
 
 class Pawn : public BasePiece {
 private:

@@ -1,7 +1,7 @@
 #ifndef __KNIGHT_H
 #define __KNIGHT_H
 
-#include "pieces/base_piece.h"
+#include "entities/pieces/base_piece.h"
 
 class Knight : public BasePiece {
 private:

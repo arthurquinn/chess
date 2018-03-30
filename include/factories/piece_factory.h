@@ -2,7 +2,7 @@
 #define __PIECE_FACTORY_H
 
 #include <memory>
-#include "pieces/base_piece.h"
+#include "entities/pieces/base_piece.h"
 
 class Pawn;
 class Rook;

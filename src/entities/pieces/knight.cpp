@@ -1,4 +1,4 @@
-#include "pieces/knight.h"
+#include "entities/pieces/knight.h"
 
 Knight::Knight(const BasePiece::PieceColor color) : BasePiece(color) {
     
