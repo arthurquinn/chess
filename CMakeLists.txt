@@ -14,5 +14,6 @@ target_sources(chess
     PRIVATE
         src/main.cpp
         src/pieces/queen.cpp
+        src/graphics/window.cpp
 )
 target_compile_options(chess PUBLIC -std=c++14 -Wall -g -DDEBUG)
