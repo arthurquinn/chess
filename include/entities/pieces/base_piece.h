@@ -4,7 +4,7 @@
 #include <utility>
 #include <vector>
 
-class Board;
+#include "entities/board.h"
 
 class BasePiece {
 public:
@@ -14,8 +14,8 @@ public:
     };
 
 protected:
-    using Location = std::pair<unsigned char, unsigned char>;
     PieceColor _color;
+    using Location = Board::Location;
 
 public:
     BasePiece() = delete;
