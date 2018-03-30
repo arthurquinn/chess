@@ -14,8 +14,15 @@ public:
     };
 
 protected:
-    PieceColor _color;
     using Location = Board::Location;
+    PieceColor _color;
+    Location _location;
+
+    inline const bool in_bounds(const int x, const int y) const {
+        return x - Board::BOARD_DIM < 0 && y - Board::BOARD_DIM < 0;
+    }
+
+    const std::vector<Location> check_diagonals(const Board& board) const;
 
 public:
     BasePiece() = delete;
@@ -24,6 +31,7 @@ public:
     virtual ~BasePiece() = default;
     
     virtual const std::vector<Location> possible_moves(const Board& board) const = 0;
+
 };
 
 
