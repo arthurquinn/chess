@@ -9,8 +9,9 @@ private:
 
 public:
     Queen() = default;
-    virtual ~Queen() = default;
+    Queen(const BasePiece::PieceColor color);
 
+    virtual ~Queen() = default;
 };
 
 

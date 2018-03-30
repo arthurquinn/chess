@@ -3,12 +3,20 @@
 
 
 class BasePiece {
-private:
+public:
+    enum class PieceColor {
+        BLACK,
+        WHITE
+    };
 
+protected:
+    PieceColor _color;
 
 public:
-    BasePiece() = default;
-    virtual ~BasePiece() = 0;
+    BasePiece() = delete;
+    BasePiece(const PieceColor color);
+
+    virtual ~BasePiece() = default;
 };
 
 

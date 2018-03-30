@@ -1,0 +1,1 @@
+#include "factories/piece_factory.h"

@@ -13,7 +13,14 @@ target_link_libraries(chess ${SDL2_LIBRARIES})
 target_sources(chess 
     PRIVATE
         src/main.cpp
-        src/pieces/queen.cpp
+        src/factories/piece_factory.cpp
         src/graphics/window.cpp
+        src/pieces/base_piece.cpp
+        src/pieces/queen.cpp
+        src/pieces/king.cpp
+        src/pieces/pawn.cpp
+        src/pieces/knight.cpp
+        src/pieces/bishop.cpp
+        src/pieces/rook.cpp
 )
 target_compile_options(chess PUBLIC -std=c++14 -Wall -g -DDEBUG)
