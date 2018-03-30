@@ -4,6 +4,8 @@ project(chess)
 add_executable(test_chess "")
 
 target_link_libraries(test_chess gtest_main)
+
+enable_testing()
 add_test(NAME run_chess_test COMMAND test_chess)
 
 target_sources(test_chess

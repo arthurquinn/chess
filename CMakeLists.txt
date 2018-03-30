@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.5.1)
 project(chess)
 
+include(CTest)
+
 find_package(PkgConfig REQUIRED)
 find_package(SDL2 REQUIRED)
 
