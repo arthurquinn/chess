@@ -25,4 +25,4 @@ target_sources(chess
         src/entities/pieces/bishop.cpp
         src/entities/pieces/rook.cpp
 )
-target_compile_options(chess PUBLIC -std=c++14 -Wall -g -DDEBUG)
+target_compile_options(chess PUBLIC -std=c++14 -Wall -pedantic -g -DDEBUG)
