@@ -22,16 +22,20 @@ $(BIN)/%.o: $(SRCDIR)/%.cpp
 $(TARGET): $(OBJ)
 	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDLIBS)
 
+
+.PHONY: build_dir
 build_dir:
 	@$(MKDIR) $(BUILD)
 	@$(MKDIR) $(BIN)
 
+.PHONY: all
 all: build_dir $(TARGET)
 
+.PHONY: debug
 debug: DEBUG=-DDEBUG -g
 debug: all
 
-.PHONY:
+.PHONY: clean
 clean:
 	$(RM) $(BUILD) $(BIN)
 
