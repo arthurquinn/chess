@@ -5,13 +5,14 @@
 
 class Bishop : public BasePiece {
 private:
-
-
+    
 public:
     Bishop() = default;
     Bishop(const BasePiece::PieceColor color);
 
     virtual ~Bishop() = default;
+
+    virtual const std::vector<Location> possible_moves(const Board& board) const override;
 };
 
 

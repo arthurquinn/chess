@@ -12,6 +12,8 @@ public:
     Queen(const BasePiece::PieceColor color);
 
     virtual ~Queen() = default;
+
+    virtual const std::vector<Location> possible_moves(const Board& board) const override;
 };
 
 

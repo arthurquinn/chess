@@ -12,6 +12,8 @@ public:
     King(const BasePiece::PieceColor color);
 
     virtual ~King() = default;
+
+    virtual const std::vector<Location> possible_moves(const Board& board) const override;
 };
 
 

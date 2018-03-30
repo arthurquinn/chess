@@ -12,6 +12,8 @@ public:
     Pawn(const BasePiece::PieceColor color);
 
     virtual ~Pawn() = default;
+
+    virtual const std::vector<Location> possible_moves(const Board& board) const override;
 };
 
 
