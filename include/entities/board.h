@@ -5,7 +5,7 @@
 #include <memory>
 #include <experimental/optional>
 
-class BasePiece;
+#include "entities/pieces/base_piece.h"
 
 class Board {
 public:
@@ -18,7 +18,7 @@ private:
     BoardGrid _board;
 
 public:
-    using Location = std::pair<const unsigned char, const unsigned char>;
+    using Location = BasePiece::Location;
 
     Board() = default;
     virtual ~Board() = default;

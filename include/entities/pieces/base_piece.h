@@ -4,23 +4,21 @@
 #include <utility>
 #include <vector>
 
-#include "entities/board.h"
+class Board;
 
 class BasePiece {
 public:
+    using Location = std::pair<const unsigned char, const unsigned char>;
     enum class PieceColor {
         BLACK,
         WHITE
     };
 
 protected:
-    using Location = Board::Location;
     PieceColor _color;
     Location _location;
 
-    inline const bool in_bounds(const int x, const int y) const {
-        return x - Board::BOARD_DIM < 0 && y - Board::BOARD_DIM < 0;
-    }
+    const bool in_bounds(const int x, const int y) const;
 
     const std::vector<Location> check_diagonals(const Board& board) const;
 

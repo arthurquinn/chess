@@ -1,7 +1,12 @@
 #include "entities/pieces/base_piece.h"
+#include "entities/board.h"
 
 BasePiece::BasePiece(const PieceColor color) : _color(color) {
     
+}
+
+const bool BasePiece::in_bounds(const int x, const int y) const {
+    return x - Board::BOARD_DIM < 0 && y - Board::BOARD_DIM < 0;
 }
 
 const std::vector<BasePiece::Location> BasePiece::check_diagonals(const Board& board) const {
