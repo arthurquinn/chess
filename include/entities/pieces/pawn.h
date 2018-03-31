@@ -8,7 +8,7 @@ private:
 
 
 public:
-    Pawn() = default;
+    Pawn() = delete;
     Pawn(const BasePiece::PieceColor color);
 
     virtual ~Pawn() = default;

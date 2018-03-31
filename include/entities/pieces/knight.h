@@ -8,7 +8,7 @@ private:
 
 
 public:
-    Knight() = default;
+    Knight() = delete;
     Knight(const BasePiece::PieceColor color);
 
     virtual ~Knight() = default;
