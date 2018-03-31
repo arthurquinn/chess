@@ -3,19 +3,25 @@
 
 #include <array>
 #include <memory>
-#include <experimental/optional>
 
 #include "entities/pieces/base_piece.h"
+
+class PieceFactory;
 
 class Board {
 public:
     static const unsigned char BOARD_DIM = 8;
 private:
-    using BoardData = std::experimental::optional<std::unique_ptr<BasePiece>>;
+    using BoardData = std::unique_ptr<BasePiece>;
     using BoardRow = std::array<BoardData, BOARD_DIM>;
     using BoardGrid = std::array<BoardRow, BOARD_DIM>;
 
+    using PieceColor = BasePiece::PieceColor;
+
     BoardGrid _board;
+
+    void create_minor_row(const PieceFactory& pf, const unsigned char row, const PieceColor color);
+    void create_major_row(const PieceFactory& pf, const unsigned char row, const PieceColor color);
 
 public:
     using Location = BasePiece::Location;
@@ -33,6 +39,9 @@ public:
 
     const BoardData& at(const int x, const int y) const;
     const BoardData& at(const Location location) const;
+
+    void clear();
+    void setup();
 };
 
 
