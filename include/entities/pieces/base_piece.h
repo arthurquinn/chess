@@ -20,7 +20,9 @@ protected:
 
     const bool in_bounds(const int x, const int y) const;
 
-    const std::vector<Location> check_diagonals(const Board& board) const;
+    void check_path(const Board& board, std::vector<Location>& locs, int x, int y, const int dx, const int dy) const;
+    void check_diagonals(const Board& board, std::vector<Location>& locs) const;
+    void check_across(const Board& board, std::vector<Location>& locs) const;
 
 public:
     BasePiece() = delete;
