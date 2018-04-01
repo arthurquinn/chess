@@ -8,7 +8,7 @@ private:
 
 
 public:
-    King() = default;
+    King() = delete;
     King(const BasePiece::PieceColor color);
 
     virtual ~King() = default;

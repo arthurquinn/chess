@@ -7,7 +7,7 @@ class Rook : public BasePiece {
 private:
 
 public:
-    Rook() = default;
+    Rook() = delete;
     Rook(const BasePiece::PieceColor color);
 
     virtual ~Rook() = default;

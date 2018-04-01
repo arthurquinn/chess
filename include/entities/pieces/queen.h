@@ -8,7 +8,7 @@ private:
 
 
 public:
-    Queen() = default;
+    Queen() = delete;
     Queen(const BasePiece::PieceColor color);
 
     virtual ~Queen() = default;

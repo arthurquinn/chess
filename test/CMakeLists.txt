@@ -3,7 +3,7 @@ project(chess)
 
 add_executable(test_chess "")
 
-target_link_libraries(test_chess gtest_main)
+target_link_libraries(test_chess chess_components gtest_main)
 
 enable_testing()
 add_test(NAME run_chess_test COMMAND test_chess)

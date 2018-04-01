@@ -9,26 +9,26 @@
 
 // TODO: Do we really need a factory...?
 
-const std::shared_ptr<Pawn> PieceFactory::createPawn(const BasePiece::PieceColor color) const {
-    return std::make_shared<Pawn>(color);
+std::unique_ptr<BasePiece> PieceFactory::createPawn(const BasePiece::PieceColor color) const {
+    return std::make_unique<Pawn>(color);
 }
 
-const std::shared_ptr<Rook> PieceFactory::createRook(const BasePiece::PieceColor color) const {
-    return std::make_shared<Rook>(color);
+std::unique_ptr<BasePiece> PieceFactory::createRook(const BasePiece::PieceColor color) const {
+    return std::make_unique<Rook>(color);
 }
 
-const std::shared_ptr<Bishop> PieceFactory::createBishop(const BasePiece::PieceColor color) const {
-    return std::make_shared<Bishop>(color);
+std::unique_ptr<BasePiece> PieceFactory::createBishop(const BasePiece::PieceColor color) const {
+    return std::make_unique<Bishop>(color);
 }
 
-const std::shared_ptr<Knight> PieceFactory::createKnight(const BasePiece::PieceColor color) const {
-    return std::make_shared<Knight>(color);
+std::unique_ptr<BasePiece> PieceFactory::createKnight(const BasePiece::PieceColor color) const {
+    return std::make_unique<Knight>(color);
 }
 
-const std::shared_ptr<Queen> PieceFactory::createQueen(const BasePiece::PieceColor color) const {
-    return std::make_shared<Queen>(color);
+std::unique_ptr<BasePiece> PieceFactory::createQueen(const BasePiece::PieceColor color) const {
+    return std::make_unique<Queen>(color);
 }
 
-const std::shared_ptr<King> PieceFactory::createKing(const BasePiece::PieceColor color) const {
-    return std::make_shared<King>(color);
+std::unique_ptr<BasePiece> PieceFactory::createKing(const BasePiece::PieceColor color) const {
+    return std::make_unique<King>(color);
 }

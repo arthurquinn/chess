@@ -7,7 +7,7 @@ class Bishop : public BasePiece {
 private:
     
 public:
-    Bishop() = default;
+    Bishop() = delete;
     Bishop(const BasePiece::PieceColor color);
 
     virtual ~Bishop() = default;
