@@ -18,7 +18,7 @@ protected:
     PieceColor _color;
     Location _location;
 
-    const bool in_bounds(const int x, const int y) const;
+    bool in_bounds(const int x, const int y) const;
 
     void check_path(const Board& board, std::vector<Location>& locs, int x, int y, const int dx, const int dy) const;
     void check_diagonals(const Board& board, std::vector<Location>& locs) const;

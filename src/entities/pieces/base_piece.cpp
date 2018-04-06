@@ -5,7 +5,7 @@ BasePiece::BasePiece(const PieceColor color) : _color(color) {
     
 }
 
-const bool BasePiece::in_bounds(const int x, const int y) const {
+bool BasePiece::in_bounds(const int x, const int y) const {
     return x - Board::BOARD_DIM < 0 && y - Board::BOARD_DIM < 0;
 }
 

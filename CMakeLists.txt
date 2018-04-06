@@ -25,7 +25,7 @@ target_sources(chess_components
         src/entities/pieces/bishop.cpp
         src/entities/pieces/rook.cpp
 )
-target_compile_options(chess_components PUBLIC -std=c++14 -Wall -pedantic -g -DDEBUG)
+target_compile_options(chess_components PUBLIC -std=c++14 -Wall -Wextra -Werror -pedantic -g -DDEBUG -Og)
 
 add_executable(chess "")
 target_link_libraries(chess ${SDL2_LIBRARIES} chess_components)
@@ -33,7 +33,7 @@ target_sources(chess
     PRIVATE
         src/main.cpp
 )
-target_compile_options(chess PUBLIC -std=c++14 -Wall -pedantic -g -DDEBUG)
+target_compile_options(chess PUBLIC -std=c++14 -Wall -Wextra -Werror -pedantic -g -DDEBUG -Og)
 
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
