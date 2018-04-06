@@ -9,6 +9,8 @@ find_package(SDL2 REQUIRED)
 include_directories(include)
 include_directories(${SDL2_INCLUDE_DIRS})
 
+list(APPEND CUSTOM_COMPILE_OPTIONS "-std=c++14" "-Wall" "-Wextra" "-Werror" "-pedantic" "-g" "-Og")
+
 add_library(chess_components STATIC "")
 target_link_libraries(chess_components ${SDL2_LIBRARIES})
 target_sources(chess_components
@@ -25,7 +27,7 @@ target_sources(chess_components
         src/entities/pieces/bishop.cpp
         src/entities/pieces/rook.cpp
 )
-target_compile_options(chess_components PUBLIC -std=c++14 -Wall -Wextra -Werror -pedantic -g -DDEBUG -Og)
+target_compile_options(chess_components PUBLIC ${CUSTOM_COMPILE_OPTIONS})
 
 add_executable(chess "")
 target_link_libraries(chess ${SDL2_LIBRARIES} chess_components)
@@ -33,7 +35,7 @@ target_sources(chess
     PRIVATE
         src/main.cpp
 )
-target_compile_options(chess PUBLIC -std=c++14 -Wall -Wextra -Werror -pedantic -g -DDEBUG -Og)
+target_compile_options(chess PUBLIC ${CUSTOM_COMPILE_OPTIONS})
 
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
