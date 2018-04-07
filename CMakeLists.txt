@@ -26,6 +26,7 @@ target_sources(chess_components
         src/entities/pieces/knight.cpp
         src/entities/pieces/bishop.cpp
         src/entities/pieces/rook.cpp
+        src/utilities/logger.cpp
 )
 target_compile_options(chess_components PUBLIC ${CUSTOM_COMPILE_OPTIONS})
 
