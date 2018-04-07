@@ -5,7 +5,7 @@
 
 class Knight : public BasePiece {
 private:
-
+    const std::vector<std::pair<const int, const int>> L_MOVES;
 
 public:
     Knight() = delete;
