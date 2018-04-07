@@ -20,17 +20,17 @@ private:
 
     std::ostream *_ostream;
 
-    std::ostream& color(const LogLevel level);
+    std::ostream& color(const LogLevel level) const;
 
 public:
     Logger();
     virtual ~Logger() = default;
 
-    std::ostream& debug(std::string&& msg);
-    std::ostream& info(std::string&& msg);
-    std::ostream& warn(std::string&& msg);
-    std::ostream& error(std::string&& msg);
-    std::ostream& fatal(std::string&& msg);
+    void debug(std::string&& msg) const;
+    void info(std::string&& msg) const;
+    void warn(std::string&& msg) const;
+    void error(std::string&& msg) const;
+    void fatal(std::string&& msg) const;
 
     void set_ostream(std::ostream * const os);
 };

@@ -12,28 +12,28 @@ Logger::Logger() : _color_map({
 
 }
 
-std::ostream& Logger::color(const LogLevel level) {
+std::ostream& Logger::color(const LogLevel level) const {
     return *_ostream << _color_map.at(level);
 }
 
-std::ostream& Logger::debug(std::string&& msg) {
-    return color(LogLevel::DEBUG) << "[DEBUG]:" << std::forward<std::string>(msg) << _reset_color << std::endl;
+void Logger::debug(std::string&& msg) const {
+    color(LogLevel::DEBUG) << "[DEBUG]:" << std::forward<std::string>(msg) << _reset_color << std::endl;
 }
 
-std::ostream& Logger::info(std::string&& msg) {
-    return color(LogLevel::INFO) << "[INFO]:" << std::forward<std::string>(msg) << _reset_color << std::endl;
+void Logger::info(std::string&& msg) const {
+    color(LogLevel::INFO) << "[INFO]:" << std::forward<std::string>(msg) << _reset_color << std::endl;
 }
 
-std::ostream& Logger::warn(std::string&& msg) {
-    return color(LogLevel::WARN) << "[WARN]:" << std::forward<std::string>(msg) << _reset_color << std::endl;
+void Logger::warn(std::string&& msg) const {
+    color(LogLevel::WARN) << "[WARN]:" << std::forward<std::string>(msg) << _reset_color << std::endl;
 }
 
-std::ostream& Logger::error(std::string&& msg) {
-    return color(LogLevel::ERROR) << "[ERROR]:" << std::forward<std::string>(msg) << _reset_color << std::endl;
+void Logger::error(std::string&& msg) const {
+    color(LogLevel::ERROR) << "[ERROR]:" << std::forward<std::string>(msg) << _reset_color << std::endl;
 }
 
-std::ostream& Logger::fatal(std::string&& msg) {
-    return color(LogLevel::FATAL) << "[FATAL]:" << std::forward<std::string>(msg) << _reset_color << std::endl;
+void Logger::fatal(std::string&& msg) const {
+    color(LogLevel::FATAL) << "[FATAL]:" << std::forward<std::string>(msg) << _reset_color << std::endl;
 }
 
 void Logger::set_ostream(std::ostream * const os) {
