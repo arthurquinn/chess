@@ -28,3 +28,8 @@ const std::vector<BasePiece::Location> Knight::possible_moves(const Board& board
     }
     return std::vector<Location>();
 }
+
+void Knight::print(std::ostream& os) const {
+    os << " n" << color_char() << " ";
+}
+

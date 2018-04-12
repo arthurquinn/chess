@@ -21,3 +21,7 @@ const std::vector<BasePiece::Location> King::possible_moves(const Board& board) 
     }
     return std::vector<Location>();
 }
+
+void King::print(std::ostream& os) const {
+    os << " k" << color_char() << " ";
+}

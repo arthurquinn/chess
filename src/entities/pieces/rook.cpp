@@ -9,3 +9,7 @@ const std::vector<BasePiece::Location> Rook::possible_moves(const Board& board) 
     check_across(board, locs);
     return locs;
 }
+
+void Rook::print(std::ostream& os) const {
+    os << " r" << color_char() << " ";
+}

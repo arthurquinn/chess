@@ -44,3 +44,16 @@ void Board::setup() {
     create_major_row(pf, 0, PieceColor::WHITE);
     create_major_row(pf, 7, PieceColor::BLACK);
 }
+
+void Board::print(std::ostream& os) const {
+    for (const auto& row : _board) {
+        for (const auto& data : row) {
+            if (data) {
+                data->print(os);
+            } else {
+                os << " -- ";
+            }
+        }
+        os << std::endl;
+    }
+}

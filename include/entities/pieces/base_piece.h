@@ -4,9 +4,11 @@
 #include <utility>
 #include <vector>
 
+#include "interfaces/printable.h"
+
 class Board;
 
-class BasePiece {
+class BasePiece : public Printable {
 public:
     using Location = std::pair<const unsigned char, const unsigned char>;
     enum class PieceColor {
@@ -17,6 +19,10 @@ public:
 protected:
     PieceColor _color;
     Location _location;
+
+    inline char color_char() const {
+        return _color == PieceColor::WHITE ? 'w' : 'b';
+    }
 
     bool in_bounds(const int x, const int y) const;
 
@@ -32,6 +38,7 @@ public:
     
     virtual const std::vector<Location> possible_moves(const Board& board) const = 0;
 
+    virtual void print(std::ostream& os) const = 0;
 };
 
 

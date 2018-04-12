@@ -14,6 +14,8 @@ public:
     virtual ~Queen() = default;
 
     virtual const std::vector<Location> possible_moves(const Board& board) const override;
+
+    virtual void print(std::ostream& os) const override;
 };
 
 

@@ -11,3 +11,6 @@ const std::vector<BasePiece::Location> Queen::possible_moves(const Board& board)
     return locs;
 }
 
+void Queen::print(std::ostream& os) const {
+    os << " q" << color_char() << " ";
+}

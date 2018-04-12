@@ -24,3 +24,7 @@ const std::vector<BasePiece::Location> Pawn::possible_moves(const Board& board) 
     return locs;
 }
 
+void Pawn::print(std::ostream& os) const {
+    os << " p" << color_char() << " ";
+}
+

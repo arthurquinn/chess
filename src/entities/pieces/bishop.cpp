@@ -9,3 +9,7 @@ const std::vector<BasePiece::Location> Bishop::possible_moves(const Board& board
     check_diagonals(board, locs);
     return locs;
 }
+
+void Bishop::print(std::ostream& os) const {
+    os << " b" << color_char() << " ";
+}

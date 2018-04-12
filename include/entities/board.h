@@ -4,11 +4,12 @@
 #include <array>
 #include <memory>
 
+#include "interfaces/printable.h"
 #include "entities/pieces/base_piece.h"
 
 class PieceFactory;
 
-class Board {
+class Board : public Printable {
 public:
     static const unsigned char BOARD_DIM = 8;
 private:
@@ -42,6 +43,8 @@ public:
 
     void clear();
     void setup();
+
+    virtual void print(std::ostream& os) const override;
 };
 
 
