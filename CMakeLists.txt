@@ -17,6 +17,7 @@ target_sources(chess_components
     PRIVATE
         src/factories/piece_factory.cpp
         src/graphics/window.cpp
+        src/entities/game.cpp
         src/entities/board.cpp
         src/entities/player.cpp
         src/entities/pieces/base_piece.cpp
