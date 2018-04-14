@@ -23,6 +23,11 @@ private:
     Board _board;
     PlayerMap _players;
 
+    PlayerColor _turn_color;
+
+    // Return the color of the player's whose turn it currently is, then cycle to the color of the next player
+    PlayerColor cycle(const PlayerColor color);
+
 public:
     Game() = default;
     virtual ~Game() = default;

@@ -14,6 +14,8 @@ public:
     Player(const PlayerColor color);
 
     virtual ~Player() = default;
+
+    void turn();
 };
 
 
