@@ -18,7 +18,7 @@ public:
     };
 
 protected:
-    PieceColor _color;
+    const PieceColor _color;
     Location _location;
 
     inline char color_char() const {
