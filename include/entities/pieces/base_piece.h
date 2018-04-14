@@ -12,8 +12,9 @@ class BasePiece : public Printable {
 public:
     using Location = std::pair<const unsigned char, const unsigned char>;
     enum class PieceColor {
-        BLACK,
-        WHITE
+        INVALID,
+        WHITE,
+        BLACK
     };
 
 protected:

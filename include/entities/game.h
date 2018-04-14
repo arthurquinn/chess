@@ -1,11 +1,16 @@
 #ifndef __GAME_H
 #define __GAME_H
 
+#include <map>
+
 #include "entities/board.h"
 #include "entities/player.h"
 
 class Game {
 private:
+    using PlayerColor = BasePiece::PieceColor;
+    using PlayerMap = std::map<PlayerColor, Player>;
+
     enum class GameState {
         EMPTY,
         READY,
@@ -16,11 +21,7 @@ private:
     GameState _state = GameState::EMPTY;
 
     Board _board;
-
-    Player _wp;
-    Player _bp;
-
-    void do_turn();
+    PlayerMap _players;
 
 public:
     Game() = default;
@@ -29,6 +30,8 @@ public:
     void setup();
 
     void run();
+
+    void reset();
 };
 
 #endif
