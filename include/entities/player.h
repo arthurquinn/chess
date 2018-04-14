@@ -7,7 +7,7 @@ class Player {
 private:
     using PlayerColor = BasePiece::PieceColor;
 
-    const PlayerColor _color = PlayerColor::INVALID;
+    const PlayerColor _color;
 
 public:
     Player() = delete;
