@@ -15,6 +15,8 @@ add_library(chess_components STATIC "")
 target_link_libraries(chess_components ${SDL2_LIBRARIES})
 target_sources(chess_components
     PRIVATE
+        src/actions/move_piece.cpp
+        src/controllers/keyboard.cpp
         src/factories/piece_factory.cpp
         src/graphics/window.cpp
         src/entities/game.cpp
