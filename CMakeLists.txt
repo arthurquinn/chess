@@ -16,6 +16,7 @@ target_link_libraries(chess_components ${SDL2_LIBRARIES})
 target_sources(chess_components
     PRIVATE
         src/actions/move_piece.cpp
+        src/actions/query_moves.cpp
         src/controllers/keyboard.cpp
         src/entities/pieces/base_piece.cpp
         src/entities/pieces/queen.cpp

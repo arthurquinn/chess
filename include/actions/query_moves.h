@@ -2,13 +2,18 @@
 #define __QUERY_MOVES_H
 
 #include "interfaces/action.h"
+#include "entities/pieces/base_piece.h"
 
 class QueryMoves : public Action {
 private:
+    using Location = BasePiece::Location;
 
+    const Location _qloc;
 
 public:
-    QueryMoves() = default;
+    QueryMoves() = delete;
+    QueryMoves(const Location qloc);
+
     virtual ~QueryMoves() = default;
 };
 

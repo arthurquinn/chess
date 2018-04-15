@@ -41,10 +41,11 @@ Keyboard::OptAction Keyboard::parse_move(const TokenList& tokens) const {
 }
 
 Keyboard::OptAction Keyboard::parse_possible(const TokenList& tokens) const {
-
-    (void)tokens;
-
     OptAction empty;
+    if (tokens.size() > 1) {
+        const auto loc = parse_loc(tokens[1]);
+        if (loc) return OptAction(QueryMoves(loc.value()));
+    }
     return empty;
 }
 
