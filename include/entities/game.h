@@ -5,6 +5,7 @@
 
 #include "entities/board.h"
 #include "entities/player.h"
+#include "interfaces/action.h"
 
 class Game {
 private:
@@ -32,11 +33,15 @@ public:
     Game() = default;
     virtual ~Game() = default;
 
+    inline bool active() const {
+        return _state == GameState::READY || _state == GameState::RUNNING;
+    }
+
     void setup();
 
-    void run();
-
     void reset();
+
+    void act(const Action& action);
 };
 
 #endif

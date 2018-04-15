@@ -17,11 +17,6 @@ target_sources(chess_components
     PRIVATE
         src/actions/move_piece.cpp
         src/controllers/keyboard.cpp
-        src/factories/piece_factory.cpp
-        src/graphics/window.cpp
-        src/entities/game.cpp
-        src/entities/board.cpp
-        src/entities/player.cpp
         src/entities/pieces/base_piece.cpp
         src/entities/pieces/queen.cpp
         src/entities/pieces/king.cpp
@@ -29,6 +24,12 @@ target_sources(chess_components
         src/entities/pieces/knight.cpp
         src/entities/pieces/bishop.cpp
         src/entities/pieces/rook.cpp
+        src/entities/board.cpp
+        src/entities/game.cpp
+        src/entities/player.cpp
+        src/environment/chess_environment.cpp
+        src/factories/piece_factory.cpp
+        src/graphics/window.cpp
         src/utilities/logger.cpp
 )
 target_compile_options(chess_components PUBLIC ${CUSTOM_COMPILE_OPTIONS})

@@ -7,6 +7,7 @@
 #include <iostream>
 #include <sstream>
 
+
 Keyboard::TokenList Keyboard::split(const std::string& str, const char delim) const {
     TokenList tokens;
     std::stringstream ss(str);
@@ -17,15 +18,29 @@ Keyboard::TokenList Keyboard::split(const std::string& str, const char delim) co
     return tokens;
 }
 
-Keyboard::OptAction Keyboard::handle_move(const TokenList& tokens) const {
-    OptAction empty;
-    if (tokens.size() > 2) {
-        return OptAction(MovePiece(MovePiece::Location(0, 0), MovePiece::Location(0, 0)));
+Keyboard::OptLocation Keyboard::parse_loc(const std::string& strloc) const {
+    OptLocation empty;
+    if (strloc.size() == 2) {
+        const auto x = file2ordinal(strloc.at(0));
+        const auto y = rank2ordinal(strloc.at(1));
+        if (x < 8 && y < 8) {
+            return OptLocation(BasePiece::Location(x, y));
+        }
     }
     return empty;
 }
 
-Keyboard::OptAction Keyboard::handle_possible(const TokenList& tokens) const {
+Keyboard::OptAction Keyboard::parse_move(const TokenList& tokens) const {
+    OptAction empty;
+    if (tokens.size() > 2) {
+        const auto from = parse_loc(tokens[1]);
+        const auto to = parse_loc(tokens[2]);
+        if (from && to) return OptAction(MovePiece(from.value(), to.value()));
+    }
+    return empty;
+}
+
+Keyboard::OptAction Keyboard::parse_possible(const TokenList& tokens) const {
 
     (void)tokens;
 
@@ -41,9 +56,9 @@ Action Keyboard::get() {
         if (std::getline(std::cin, in).good()) {
             const auto tokens = split(in, ' ');
             if (tokens[0] == "move") {
-                action = handle_move(tokens);
+                action = parse_move(tokens);
             } else if (tokens[0] == "possible") {
-                action = handle_possible(tokens);
+                action = parse_possible(tokens);
             }
         }
         if (action) return action.value();

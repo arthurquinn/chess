@@ -1,34 +1,30 @@
 #include <cstdlib>
 #include <iostream>
 
-#include "utilities/logger.h"
 #include "graphics/window.h"
+#include "entities/game.h"
+#include "controllers/keyboard.cpp"
 
-#include "entities/board.h"
+#include "environment/chess_environment.h"
 
+using namespace ChessEnv;
 
 int main(int argc, char **argv) {
-
-    Logger logger;
-    logger.set_ostream(&std::cout);
-
     (void)argc;
     (void)argv;
 
-    // auto window = Window();
-    // window.test();
+    env.initialize();
 
-    logger.debug("debug");
-    logger.info("info");
-    logger.warn("warn");
-    logger.error("error");
-    logger.fatal("fatal");
+    Game game;
+    game.setup();
 
-    Board board;
+    Keyboard keyboard;
 
-    board.setup();
-    board.print(std::cout);
+    while (game.active()) {
+        game.act(keyboard.get());
+    }
 
+    env.terminate();
     return EXIT_SUCCESS;
 }
 

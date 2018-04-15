@@ -1,4 +1,7 @@
 #include "entities/game.h"
+#include "environment/chess_environment.h"
+
+using namespace ChessEnv;
 
 Game::PlayerColor Game::cycle(const PlayerColor color) {
     switch (color) {
@@ -23,19 +26,26 @@ void Game::setup() {
     _state = GameState::READY;
 }
 
-void Game::run() {
-    if (_state == GameState::READY) {
-        _state = GameState::RUNNING;
-        while (_state == GameState::RUNNING) {
-            _players.at(cycle(_turn_color)).turn();
-        }
-    }
-}
+// void Game::run() {
+//     if (_state == GameState::READY) {
+//         _state = GameState::RUNNING;
+//         while (_state == GameState::RUNNING) {
+//             _players.at(cycle(_turn_color)).turn();
+//         }
+//     }
+// }
 
 void Game::reset() {
     _board.clear();
     _players.clear();
     _turn_color = PlayerColor::INVALID;
     _state = GameState::EMPTY;
+}
+
+void Game::act(const Action& action) {
+
+    (void)action;
+
+    env.utilities.logger.debug("running action");
 }
 
