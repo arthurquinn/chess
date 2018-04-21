@@ -47,9 +47,10 @@ void Board::setup() {
 
 void Board::print(std::ostream& os) const {
     char rank = '8';
-    for (const auto& row : _board) {
+    auto row = _board.crbegin();
+    for (; row != _board.crend(); row++) {
         os << rank-- << " ";
-        for (const auto& data : row) {
+        for (const auto& data : *row) {
             if (data) {
                 data->print(os);
             } else {
