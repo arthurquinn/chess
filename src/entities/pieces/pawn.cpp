@@ -1,8 +1,15 @@
 #include "entities/pieces/pawn.h"
 #include "entities/board.h"
 
+using super = BasePiece;
+
 Pawn::Pawn(const BasePiece::PieceColor color, const int r, const int f) : BasePiece(color, r, f) {
     
+}
+
+void Pawn::move(const int r, const int f) {
+    super::move(r, f);
+    _was_moved = true;
 }
 
 const std::vector<BasePiece::Location> Pawn::possible_moves(const Board& board) const {

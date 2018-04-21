@@ -13,6 +13,8 @@ public:
 
     virtual ~Pawn() = default;
 
+    virtual void move(const int r, const int f) override;
+
     virtual const std::vector<Location> possible_moves(const Board& board) const override;
 
     virtual void print(std::ostream& os) const override;

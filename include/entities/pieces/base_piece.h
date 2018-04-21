@@ -46,7 +46,7 @@ public:
 
     inline PieceColor color() const { return _color; }
 
-    inline void move(const Location& location) { _location = location; }
+    virtual void move(const int r, const int f);
     
     virtual const std::vector<Location> possible_moves(const Board& board) const = 0;
 
