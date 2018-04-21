@@ -1,6 +1,6 @@
 #include "entities/pieces/bishop.h"
 
-Bishop::Bishop(const BasePiece::PieceColor color) : BasePiece(color) {
+Bishop::Bishop(const BasePiece::PieceColor color, const int r, const int f) : BasePiece(color, r, f) {
 
 }
 

@@ -2,20 +2,20 @@
 
 #include "entities/board.h"
 
-King::King(const BasePiece::PieceColor color) : BasePiece(color) {
+King::King(const BasePiece::PieceColor color, const int r, const int f) : BasePiece(color, r, f) {
 
 }
 
 const std::vector<BasePiece::Location> King::possible_moves(const Board& board) const {
     auto locs = std::vector<Location>();
     const auto d = { -1, 0, 1 };
-    for (const auto dx : d) {
-        for (const auto dy : d) {
-            if (dx == 0 && dy == 0) continue;
-            const int x = _location.first + dx;
-            const int y = _location.second + dy;
-            if (in_bounds(x, y) && (!board.at(x, y) || opposing_colors(*board.at(x, y)))) {
-                locs.push_back(Location(x, y));
+    for (const auto dr : d) {
+        for (const auto df : d) {
+            if (dr == 0 && df == 0) continue;
+            const int r = _location.first + dr;
+            const int f = _location.second + df;
+            if (in_bounds(r, f) && (!board.at(r, f) || opposing_colors(*board.at(r, f)))) {
+                locs.push_back(Location(r, f));
             }
         }
     }

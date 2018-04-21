@@ -1,6 +1,6 @@
 #include "entities/pieces/rook.h"
 
-Rook::Rook(const BasePiece::PieceColor color) : BasePiece(color) {
+Rook::Rook(const BasePiece::PieceColor color, const int r, const int f) : BasePiece(color, r, f) {
     
 }
 

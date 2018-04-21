@@ -1,24 +1,26 @@
 #include "entities/pieces/base_piece.h"
 #include "entities/board.h"
 
-BasePiece::BasePiece(const PieceColor color) : _color(color) {
-    
+BasePiece::BasePiece(const PieceColor color, const int r, const int f) :
+        _color(color),
+        _location(r, f) {
+
 }
 
-bool BasePiece::in_bounds(const int x, const int y) const {
-    return x - Board::BOARD_DIM < 0 && y - Board::BOARD_DIM < 0;
+bool BasePiece::in_bounds(const int r, const int f) const {
+    return r - Board::BOARD_DIM < 0 && f - Board::BOARD_DIM < 0;
 }
 
-void BasePiece::check_path(const Board& board, std::vector<Location>& locs, int x, int y, const int dx, const int dy) const {
-    x += dx;
-    y += dy;
-    while (in_bounds(x, y)) {
-        if (!board.at(x, y)) {
-            locs.push_back(Location(x, y));
-            x += dx;
-            y += dy;
-        } else if (opposing_colors(*board.at(x, y))) {
-            locs.push_back(Location(x, y));
+void BasePiece::check_path(const Board& board, std::vector<Location>& locs, int r, int f, const int dr, const int df) const {
+    r += dr;
+    f += df;
+    while (in_bounds(r, f)) {
+        if (!board.at(r, f)) {
+            locs.push_back(Location(r, f));
+            r += dr;
+            f += df;
+        } else if (opposing_colors(*board.at(r, f))) {
+            locs.push_back(Location(r, f));
             break;
         } else {
             break;
@@ -28,19 +30,19 @@ void BasePiece::check_path(const Board& board, std::vector<Location>& locs, int 
 
 void BasePiece::check_diagonals(const Board& board, std::vector<Location>& locs) const {
     const auto d = { 1, -1 };
-    for (const auto dx : d) {
-        for (const auto dy : d) {
-            check_path(board, locs, _location.first, _location.second, dx, dy);
+    for (const auto dr : d) {
+        for (const auto df : d) {
+            check_path(board, locs, _location.first, _location.second, dr, df);
         }
     }
 }
 
 void BasePiece::check_across(const Board& board, std::vector<Location>& locs) const {
     const auto d = { -1 , 1 };
-    for (const auto dx : d) {
-        check_path(board, locs, _location.first, _location.second, dx, 0);
+    for (const auto dr : d) {
+        check_path(board, locs, _location.first, _location.second, dr, 0);
     }
-    for (const auto dy : d) {
-        check_path(board, locs, _location.first, _location.second, 0, dy);
+    for (const auto df : d) {
+        check_path(board, locs, _location.first, _location.second, 0, df);
     }
 }

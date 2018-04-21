@@ -9,7 +9,7 @@ private:
 
 public:
     King() = delete;
-    King(const BasePiece::PieceColor color);
+    King(const BasePiece::PieceColor color, const int r, const int f);
 
     virtual ~King() = default;
 

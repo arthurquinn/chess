@@ -43,9 +43,20 @@ void Game::reset() {
 }
 
 void Game::act(const Action& action) {
-
-    (void)action;
-
     env.utilities.logger.debug("running action");
+
+    const auto vresult = action.validate(_players.at(_turn_color), _board);
+    switch (vresult.first) {
+        case Action::ValidationResult::ILLEGAL:
+            env.utilities.logger.info(std::string(vresult.second)); // TODO: fix this
+            break;
+        default:
+            env.utilities.logger.info("good move buddy");
+            break;
+    }
+}
+
+void Game::print(std::ostream& os) const {
+    _board.print(os);
 }
 

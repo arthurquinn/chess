@@ -8,7 +8,7 @@ private:
     
 public:
     Bishop() = delete;
-    Bishop(const BasePiece::PieceColor color);
+    Bishop(const BasePiece::PieceColor color, const int r, const int f);
 
     virtual ~Bishop() = default;
 

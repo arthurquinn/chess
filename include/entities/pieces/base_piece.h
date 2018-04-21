@@ -10,7 +10,10 @@ class Board;
 
 class BasePiece : public Printable {
 public:
-    using Location = std::pair<const unsigned char, const unsigned char>;
+
+    // Location::first is rank
+    // Location::second is file
+    using Location = std::pair<int, int>;
     enum class PieceColor {
         INVALID,
         WHITE,
@@ -29,17 +32,21 @@ protected:
         return other._color != _color;
     }
 
-    bool in_bounds(const int x, const int y) const;
+    bool in_bounds(const int rank, const int file) const;
 
-    void check_path(const Board& board, std::vector<Location>& locs, int x, int y, const int dx, const int dy) const;
+    void check_path(const Board& board, std::vector<Location>& locs, int r, int f, const int dr, const int df) const;
     void check_diagonals(const Board& board, std::vector<Location>& locs) const;
     void check_across(const Board& board, std::vector<Location>& locs) const;
 
 public:
     BasePiece() = delete;
-    BasePiece(const PieceColor color);
+    BasePiece(const PieceColor color, const int r, const int f);
 
     virtual ~BasePiece() = default;
+
+    inline PieceColor color() const { return _color; }
+
+    inline void move(const Location& location) { _location = location; }
     
     virtual const std::vector<Location> possible_moves(const Board& board) const = 0;
 

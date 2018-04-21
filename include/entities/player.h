@@ -15,7 +15,7 @@ public:
 
     virtual ~Player() = default;
 
-    void turn();
+    inline bool owns_piece(const BasePiece& piece) const { return _color == piece.color(); }
 };
 
 

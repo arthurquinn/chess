@@ -9,26 +9,26 @@
 
 // TODO: Do we really need a factory...?
 
-std::unique_ptr<BasePiece> PieceFactory::createPawn(const BasePiece::PieceColor color) const {
-    return std::make_unique<Pawn>(color);
+std::unique_ptr<BasePiece> PieceFactory::createPawn(const BasePiece::PieceColor color, const int x, const int y) const {
+    return std::make_unique<Pawn>(color, x, y);
 }
 
-std::unique_ptr<BasePiece> PieceFactory::createRook(const BasePiece::PieceColor color) const {
-    return std::make_unique<Rook>(color);
+std::unique_ptr<BasePiece> PieceFactory::createRook(const BasePiece::PieceColor color, const int x, const int y) const {
+    return std::make_unique<Rook>(color, x, y);
 }
 
-std::unique_ptr<BasePiece> PieceFactory::createBishop(const BasePiece::PieceColor color) const {
-    return std::make_unique<Bishop>(color);
+std::unique_ptr<BasePiece> PieceFactory::createBishop(const BasePiece::PieceColor color, const int x, const int y) const {
+    return std::make_unique<Bishop>(color, x, y);
 }
 
-std::unique_ptr<BasePiece> PieceFactory::createKnight(const BasePiece::PieceColor color) const {
-    return std::make_unique<Knight>(color);
+std::unique_ptr<BasePiece> PieceFactory::createKnight(const BasePiece::PieceColor color, const int x, const int y) const {
+    return std::make_unique<Knight>(color, x, y);
 }
 
-std::unique_ptr<BasePiece> PieceFactory::createQueen(const BasePiece::PieceColor color) const {
-    return std::make_unique<Queen>(color);
+std::unique_ptr<BasePiece> PieceFactory::createQueen(const BasePiece::PieceColor color, const int x, const int y) const {
+    return std::make_unique<Queen>(color, x, y);
 }
 
-std::unique_ptr<BasePiece> PieceFactory::createKing(const BasePiece::PieceColor color) const {
-    return std::make_unique<King>(color);
+std::unique_ptr<BasePiece> PieceFactory::createKing(const BasePiece::PieceColor color, const int x, const int y) const {
+    return std::make_unique<King>(color, x, y);
 }

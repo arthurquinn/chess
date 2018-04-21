@@ -23,10 +23,10 @@ Keyboard::TokenList Keyboard::split(const std::string& str, const char delim) co
 opt<BasePiece::Location> Keyboard::parse_loc(const std::string& strloc) const {
     opt<BasePiece::Location> empty;
     if (strloc.size() == 2) {
-        const auto x = file2ordinal(strloc.at(0));
-        const auto y = rank2ordinal(strloc.at(1));
-        if (x < 8 && y < 8) {
-            return opt<BasePiece::Location>(BasePiece::Location(x, y));
+        const auto r = rank2ordinal(strloc.at(1));
+        const auto f = file2ordinal(strloc.at(0));
+        if (r < 8 && f < 8) {
+            return opt<BasePiece::Location>(BasePiece::Location(r, f));
         }
     }
     return empty;

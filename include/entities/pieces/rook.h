@@ -8,7 +8,7 @@ private:
 
 public:
     Rook() = delete;
-    Rook(const BasePiece::PieceColor color);
+    Rook(const BasePiece::PieceColor color, const int r, const int f);
 
     virtual ~Rook() = default;
 

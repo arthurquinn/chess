@@ -21,6 +21,7 @@ int main(int argc, char **argv) {
     Keyboard keyboard;
 
     while (game.active()) {
+        game.print(std::cout);
         game.act(*(keyboard.get()));
     }
 

@@ -2,21 +2,22 @@
 #include "factories/piece_factory.h"
 #include "entities/pieces/base_piece.h"
 
-void Board::create_minor_row(const PieceFactory& pf, const unsigned char row, const PieceColor color) {
+void Board::create_minor_row(const PieceFactory& pf, const int row, const PieceColor color) {
+    int i = 0;
     for (auto& data : _board[row]) {
-        data = pf.createPawn(color);
+        data = pf.createPawn(color, row, i++);
     }
 }
 
-void Board::create_major_row(const PieceFactory& pf, const unsigned char row, const PieceColor color) {
-    _board[row][0] = pf.createRook(color);
-    _board[row][1] = pf.createKnight(color);
-    _board[row][2] = pf.createBishop(color);
-    _board[row][3] = pf.createQueen(color);
-    _board[row][4] = pf.createKing(color);
-    _board[row][5] = pf.createBishop(color);
-    _board[row][6] = pf.createKnight(color);
-    _board[row][7] = pf.createRook(color);
+void Board::create_major_row(const PieceFactory& pf, const int row, const PieceColor color) {
+    _board[row][0] = pf.createRook(color, row, 0);
+    _board[row][1] = pf.createKnight(color, row, 1);
+    _board[row][2] = pf.createBishop(color, row, 2);
+    _board[row][3] = pf.createQueen(color, row, 3);
+    _board[row][4] = pf.createKing(color, row, 4);
+    _board[row][5] = pf.createBishop(color, row, 5);
+    _board[row][6] = pf.createKnight(color, row, 6);
+    _board[row][7] = pf.createRook(color, row, 7);
 }
 
 const Board::BoardData& Board::at(const int x, const int y) const {

@@ -11,7 +11,7 @@ class PieceFactory;
 
 class Board : public Printable {
 public:
-    static const unsigned char BOARD_DIM { 8 };
+    static const int BOARD_DIM { 8 };
 private:
     using BoardData = std::unique_ptr<BasePiece>;
     using BoardRow = std::array<BoardData, BOARD_DIM>;
@@ -21,8 +21,8 @@ private:
 
     BoardGrid _board;
 
-    void create_minor_row(const PieceFactory& pf, const unsigned char row, const PieceColor color);
-    void create_major_row(const PieceFactory& pf, const unsigned char row, const PieceColor color);
+    void create_minor_row(const PieceFactory& pf, const int row, const PieceColor color);
+    void create_major_row(const PieceFactory& pf, const int row, const PieceColor color);
 
 public:
     using Location = BasePiece::Location;
@@ -38,7 +38,7 @@ public:
     Board(Board&& move) = delete;
     Board& operator=(Board&& move) = delete;
 
-    const BoardData& at(const int x, const int y) const;
+    const BoardData& at(const int r, const int f) const;
     const BoardData& at(const Location location) const;
 
     void clear();

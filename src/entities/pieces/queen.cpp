@@ -1,6 +1,6 @@
 #include "entities/pieces/queen.h"
 
-Queen::Queen(const BasePiece::PieceColor color) : BasePiece(color) {
+Queen::Queen(const BasePiece::PieceColor color, const int r, const int f) : BasePiece(color, r, f) {
     
 }
 

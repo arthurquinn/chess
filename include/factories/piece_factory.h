@@ -11,12 +11,12 @@ public:
     PieceFactory() = default;
     virtual ~PieceFactory() = default;
 
-    std::unique_ptr<BasePiece> createPawn(const BasePiece::PieceColor color) const;
-    std::unique_ptr<BasePiece> createRook(const BasePiece::PieceColor color) const;
-    std::unique_ptr<BasePiece> createBishop(const BasePiece::PieceColor color) const;
-    std::unique_ptr<BasePiece> createKnight(const BasePiece::PieceColor color) const;
-    std::unique_ptr<BasePiece> createQueen(const BasePiece::PieceColor color) const;
-    std::unique_ptr<BasePiece> createKing(const BasePiece::PieceColor color) const;
+    std::unique_ptr<BasePiece> createPawn(const BasePiece::PieceColor color, const int x, const int y) const;
+    std::unique_ptr<BasePiece> createRook(const BasePiece::PieceColor color, const int x, const int y) const;
+    std::unique_ptr<BasePiece> createBishop(const BasePiece::PieceColor color, const int x, const int y) const;
+    std::unique_ptr<BasePiece> createKnight(const BasePiece::PieceColor color, const int x, const int y) const;
+    std::unique_ptr<BasePiece> createQueen(const BasePiece::PieceColor color, const int x, const int y) const;
+    std::unique_ptr<BasePiece> createKing(const BasePiece::PieceColor color, const int x, const int y) const;
 };
 
 

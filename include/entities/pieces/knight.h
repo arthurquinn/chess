@@ -5,11 +5,11 @@
 
 class Knight : public BasePiece {
 private:
-    const std::vector<std::pair<const int, const int>> L_MOVES;
+    const std::vector<BasePiece::Location> L_MOVES;
 
 public:
     Knight() = delete;
-    Knight(const BasePiece::PieceColor color);
+    Knight(const BasePiece::PieceColor color, const int r, const int f);
 
     virtual ~Knight() = default;
 

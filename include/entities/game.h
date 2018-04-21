@@ -6,8 +6,9 @@
 #include "entities/board.h"
 #include "entities/player.h"
 #include "interfaces/action.h"
+#include "interfaces/printable.h"
 
-class Game {
+class Game : public Printable {
 public:
     using PlayerColor = BasePiece::PieceColor;
 private:
@@ -43,6 +44,8 @@ public:
     void reset();
 
     void act(const Action& action);
+
+    virtual void print(std::ostream& os) const override;
 };
 
 #endif
