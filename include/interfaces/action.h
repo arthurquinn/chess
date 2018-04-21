@@ -5,7 +5,7 @@
 #include <utility>
 
 class Board;
-class Game;
+class Player;
 
 class Action {
 private:
@@ -26,8 +26,8 @@ public:
     Action() = default;
     virtual ~Action() = default;
 
-    virtual ValidationResponse validate(const Game& game) const = 0;
-    virtual ActionResponse run(const Board& board) const = 0;
+    virtual ValidationResponse validate(const Player& player, const Board& board) const = 0;
+    virtual ActionResponse run(const Player& player, const Board& board) const = 0;
 };
 
 #endif

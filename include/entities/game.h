@@ -8,8 +8,9 @@
 #include "interfaces/action.h"
 
 class Game {
-private:
+public:
     using PlayerColor = BasePiece::PieceColor;
+private:
     using PlayerMap = std::map<PlayerColor, Player>;
 
     enum class GameState {
