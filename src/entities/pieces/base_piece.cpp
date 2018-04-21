@@ -17,6 +17,9 @@ void BasePiece::check_path(const Board& board, std::vector<Location>& locs, int 
             locs.push_back(Location(x, y));
             x += dx;
             y += dy;
+        } else if (opposing_colors(*board.at(x, y))) {
+            locs.push_back(Location(x, y));
+            break;
         } else {
             break;
         }

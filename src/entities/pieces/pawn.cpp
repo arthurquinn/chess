@@ -2,8 +2,7 @@
 #include "entities/board.h"
 
 Pawn::Pawn(const BasePiece::PieceColor color) :
-        BasePiece(color),
-        _was_moved(false) {
+        BasePiece(color) {
     
 }
 
@@ -18,7 +17,7 @@ const std::vector<BasePiece::Location> Pawn::possible_moves(const Board& board) 
 
     // First move check
     const auto y2 = y + dy;
-    if (!_was_moved && in_bounds(x, y2) && !board.at(x, y2)) {
+    if (!_was_moved && in_bounds(x, y2)) {
         locs.push_back(Location(x, y2));
     }
     return locs;

@@ -25,6 +25,10 @@ protected:
         return _color == PieceColor::WHITE ? 'w' : 'b';
     }
 
+    inline bool opposing_colors(const BasePiece& other) const {
+        return other._color != _color;
+    }
+
     bool in_bounds(const int x, const int y) const;
 
     void check_path(const Board& board, std::vector<Location>& locs, int x, int y, const int dx, const int dy) const;

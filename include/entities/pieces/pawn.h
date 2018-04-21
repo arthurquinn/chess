@@ -5,7 +5,7 @@
 
 class Pawn : public BasePiece {
 private:
-    bool _was_moved;
+    bool _was_moved { false };
 
 public:
     Pawn() = delete;

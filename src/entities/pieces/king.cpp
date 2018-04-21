@@ -14,12 +14,12 @@ const std::vector<BasePiece::Location> King::possible_moves(const Board& board) 
             if (dx == 0 && dy == 0) continue;
             const int x = _location.first + dx;
             const int y = _location.second + dy;
-            if (in_bounds(x, y) && !board.at(x, y)) {
+            if (in_bounds(x, y) && (!board.at(x, y) || opposing_colors(*board.at(x, y)))) {
                 locs.push_back(Location(x, y));
             }
         }
     }
-    return std::vector<Location>();
+    return locs;
 }
 
 void King::print(std::ostream& os) const {
