@@ -11,7 +11,7 @@ class PieceFactory;
 
 class Board : public Printable {
 public:
-    static const unsigned char BOARD_DIM = 8;
+    static const unsigned char BOARD_DIM { 8 };
 private:
     using BoardData = std::unique_ptr<BasePiece>;
     using BoardRow = std::array<BoardData, BOARD_DIM>;

@@ -15,7 +15,7 @@ private:
         FATAL = 5
     };
 
-    const std::string _reset_color = "\033[0m";
+    const std::string _reset_color { "\033[0m" };
     const std::map<const LogLevel, const std::string> _color_map;
 
     std::ostream *_ostream;

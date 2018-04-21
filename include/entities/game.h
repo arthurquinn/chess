@@ -19,7 +19,7 @@ private:
         COMPLETE
     };
 
-    GameState _state = GameState::EMPTY;
+    GameState _state { GameState::EMPTY };
 
     Board _board;
     PlayerMap _players;
