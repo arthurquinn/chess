@@ -17,6 +17,8 @@ public:
     MovePiece(const Location from, const Location to);
 
     virtual ~MovePiece() = default;
+
+    void run() const override;
 };
 
 #endif

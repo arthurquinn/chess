@@ -9,7 +9,7 @@ public:
     Action() = default;
     virtual ~Action() = default;
 
-    
+    virtual void run() const = 0;
 };
 
 #endif

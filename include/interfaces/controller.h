@@ -1,6 +1,8 @@
 #ifndef __CONTROLLER_H
 #define __CONTROLLER_H
 
+#include <memory>
+
 class Action;
 
 class Controller {
@@ -10,7 +12,7 @@ public:
     Controller() = default;
     virtual ~Controller() = default;
 
-    virtual Action get() = 0;
+    virtual std::unique_ptr<Action> get() = 0;
 };
 
 #endif

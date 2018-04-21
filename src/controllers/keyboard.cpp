@@ -7,6 +7,8 @@
 #include <iostream>
 #include <sstream>
 
+template<typename T>
+using opt = std::experimental::optional<T>;
 
 Keyboard::TokenList Keyboard::split(const std::string& str, const char delim) const {
     TokenList tokens;
@@ -18,40 +20,38 @@ Keyboard::TokenList Keyboard::split(const std::string& str, const char delim) co
     return tokens;
 }
 
-Keyboard::OptLocation Keyboard::parse_loc(const std::string& strloc) const {
-    OptLocation empty;
+opt<BasePiece::Location> Keyboard::parse_loc(const std::string& strloc) const {
+    opt<BasePiece::Location> empty;
     if (strloc.size() == 2) {
         const auto x = file2ordinal(strloc.at(0));
         const auto y = rank2ordinal(strloc.at(1));
         if (x < 8 && y < 8) {
-            return OptLocation(BasePiece::Location(x, y));
+            return opt<BasePiece::Location>(BasePiece::Location(x, y));
         }
     }
     return empty;
 }
 
-Keyboard::OptAction Keyboard::parse_move(const TokenList& tokens) const {
-    OptAction empty;
+std::unique_ptr<Action> Keyboard::parse_move(const TokenList& tokens) const {
     if (tokens.size() > 2) {
         const auto from = parse_loc(tokens[1]);
         const auto to = parse_loc(tokens[2]);
-        if (from && to) return OptAction(MovePiece(from.value(), to.value()));
+        if (from && to) return std::make_unique<MovePiece>(from.value(), to.value());
     }
-    return empty;
+    return nullptr;
 }
 
-Keyboard::OptAction Keyboard::parse_possible(const TokenList& tokens) const {
-    OptAction empty;
+std::unique_ptr<Action> Keyboard::parse_possible(const TokenList& tokens) const {
     if (tokens.size() > 1) {
         const auto loc = parse_loc(tokens[1]);
-        if (loc) return OptAction(QueryMoves(loc.value()));
+        if (loc) return std::make_unique<QueryMoves>(loc.value());
     }
-    return empty;
+    return nullptr;
 }
 
-Action Keyboard::get() {
+std::unique_ptr<Action> Keyboard::get() {
     std::string in;
-    OptAction action;
+    std::unique_ptr<Action> action;
     // TODO: implement some interruption mechanism
     for (;;) {
         if (std::getline(std::cin, in).good()) {
@@ -62,6 +62,6 @@ Action Keyboard::get() {
                 action = parse_possible(tokens);
             }
         }
-        if (action) return action.value();
+        if (action) return action;
     }
 }

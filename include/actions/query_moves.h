@@ -15,6 +15,8 @@ public:
     QueryMoves(const Location qloc);
 
     virtual ~QueryMoves() = default;
+
+    void run() const override;
 };
 
 #endif

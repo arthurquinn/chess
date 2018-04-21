@@ -10,8 +10,6 @@
 
 class Keyboard : public Controller {
 private:
-    using OptAction = std::experimental::optional<Action>;
-    using OptLocation = std::experimental::optional<BasePiece::Location>;
     using TokenList = std::vector<std::string>;
 
     inline unsigned char file2ordinal(const unsigned char file) const {
@@ -24,17 +22,17 @@ private:
 
     TokenList split(const std::string& str, const char delim) const;
 
-    OptLocation parse_loc(const std::string& strloc) const;
+    std::experimental::optional<BasePiece::Location> parse_loc(const std::string& strloc) const;
 
-    OptAction parse_move(const TokenList& tokens) const;
+    std::unique_ptr<Action> parse_move(const TokenList& tokens) const;
 
-    OptAction parse_possible(const TokenList& tokens) const;
+    std::unique_ptr<Action> parse_possible(const TokenList& tokens) const;
 
 public:
     Keyboard() = default;
     virtual ~Keyboard() = default;
 
-    Action get() override;
+    std::unique_ptr<Action> get() override;
 };
 
 

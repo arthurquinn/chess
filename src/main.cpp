@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
     Keyboard keyboard;
 
     while (game.active()) {
-        game.act(keyboard.get());
+        game.act(*(keyboard.get()));
     }
 
     env.terminate();
