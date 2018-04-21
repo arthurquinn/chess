@@ -46,7 +46,9 @@ void Board::setup() {
 }
 
 void Board::print(std::ostream& os) const {
+    char rank = '8';
     for (const auto& row : _board) {
+        os << rank-- << " ";
         for (const auto& data : row) {
             if (data) {
                 data->print(os);
@@ -56,4 +58,10 @@ void Board::print(std::ostream& os) const {
         }
         os << std::endl;
     }
+    char file = 'a';
+    os << "   ";
+    for (; file < 'i'; file++) {
+        os << file << "   ";
+    }
+    os << std::endl;
 }
