@@ -39,7 +39,10 @@ public:
     Board& operator=(Board&& move) = delete;
 
     const BoardData& at(const int r, const int f) const;
-    const BoardData& at(const Location location) const;
+    const BoardData& at(const Location& location) const;
+
+    void move(const int sr, const int sf, const int tr, const int tf);
+    void move(const Location& sloc, const Location& tloc);
 
     void clear();
     void setup();

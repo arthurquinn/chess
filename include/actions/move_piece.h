@@ -19,7 +19,7 @@ public:
     virtual ~MovePiece() = default;
 
     ValidationResponse validate(const Player& player, const Board& board) const override;
-    ActionResponse run(const Player& player, const Board& board) const override;
+    ActionResponse run(Player& player, Board& board) const override;
 };
 
 #endif

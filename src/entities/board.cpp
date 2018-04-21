@@ -2,6 +2,12 @@
 #include "factories/piece_factory.h"
 #include "entities/pieces/base_piece.h"
 
+#include "environment/chess_environment.h"
+
+#include <cstdlib>
+
+using namespace ChessEnv;
+
 void Board::create_minor_row(const PieceFactory& pf, const int row, const PieceColor color) {
     int i = 0;
     for (auto& data : _board[row]) {
@@ -20,12 +26,25 @@ void Board::create_major_row(const PieceFactory& pf, const int row, const PieceC
     _board[row][7] = pf.createRook(color, row, 7);
 }
 
-const Board::BoardData& Board::at(const int x, const int y) const {
-    return _board[x][y];
+const Board::BoardData& Board::at(const int r, const int f) const {
+    return _board[r][f];
 }
 
-const Board::BoardData& Board::at(const Location location) const {
+const Board::BoardData& Board::at(const Location& location) const {
     return at(location.first, location.second);
+}
+
+void Board::move(const int sr, const int sf, const int tr, const int tf) {
+    _board[tr][tf] = std::move(_board[sr][sf]);
+    if (_board[tr][tf] == nullptr) {
+        env.utilities.logger.fatal("attempted to move from location with no piece");
+        std::abort();
+    }
+    _board[tr][tf]->move(tr, tf);
+}
+
+void Board::move(const Location& sloc, const Location& tloc) {
+    move(sloc.first, sloc.second, tloc.first, tloc.second);
 }
 
 void Board::clear() {

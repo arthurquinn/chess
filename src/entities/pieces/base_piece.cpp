@@ -11,6 +11,11 @@ bool BasePiece::in_bounds(const int r, const int f) const {
     return r - Board::BOARD_DIM < 0 && f - Board::BOARD_DIM < 0;
 }
 
+void BasePiece::move(const int r, const int f) {
+    _location.first = r;
+    _location.second = f;
+}
+
 void BasePiece::check_path(const Board& board, std::vector<Location>& locs, int r, int f, const int dr, const int df) const {
     r += dr;
     f += df;

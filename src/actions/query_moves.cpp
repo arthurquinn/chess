@@ -17,7 +17,7 @@ ValidationResponse QueryMoves::validate(const Player& player, const Board& board
     return std::make_pair(ValidationResult::ILLEGAL, "");
 }
 
-ActionResponse QueryMoves::run(const Player& player, const Board& board) const {
+ActionResponse QueryMoves::run(Player& player, Board& board) const {
     (void)board;
     (void)player;
 

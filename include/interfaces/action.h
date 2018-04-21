@@ -27,7 +27,7 @@ public:
     virtual ~Action() = default;
 
     virtual ValidationResponse validate(const Player& player, const Board& board) const = 0;
-    virtual ActionResponse run(const Player& player, const Board& board) const = 0;
+    virtual ActionResponse run(Player& player, Board& board) const = 0;
 };
 
 #endif

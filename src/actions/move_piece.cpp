@@ -16,25 +16,26 @@ ValidationResponse MovePiece::validate(const Player& player, const Board& board)
     const auto& fpiece = board.at(_from);
 
     if (fpiece == nullptr) {
-        return std::make_pair(ValidationResult::ILLEGAL, "No piece at source location");
+        return std::make_pair(ValidationResult::ILLEGAL, "no piece at source location");
     }
 
     if (!player.owns_piece(*fpiece)) {
-        return std::make_pair(ValidationResult::ILLEGAL, "Player does not own this piece");
+        return std::make_pair(ValidationResult::ILLEGAL, "player does not own this piece");
     }
     
     const auto moves = fpiece->possible_moves(board);
     if (std::find(moves.cbegin(), moves.cend(), _to) == moves.cend()) {
-        return std::make_pair(ValidationResult::ILLEGAL, "This move is not valid");
+        return std::make_pair(ValidationResult::ILLEGAL, "this move is not valid");
     }
 
     return std::make_pair(ValidationResult::LEGAL, "");
 }
 
-ActionResponse MovePiece::run(const Player& player, const Board& board) const {
+ActionResponse MovePiece::run(Player& player, Board& board) const {
     (void)player;
-    (void)board;
 
+
+    board.move(_from, _to);
     return std::make_pair(ActionResult::SUCCESS, "");
 }
 

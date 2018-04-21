@@ -43,16 +43,13 @@ void Game::reset() {
 }
 
 void Game::act(const Action& action) {
-    env.utilities.logger.debug("running action");
-
+    env.utilities.logger.debug("validating action");
     const auto vresult = action.validate(_players.at(_turn_color), _board);
-    switch (vresult.first) {
-        case Action::ValidationResult::ILLEGAL:
-            env.utilities.logger.info(std::string(vresult.second)); // TODO: fix this
-            break;
-        default:
-            env.utilities.logger.info("good move buddy");
-            break;
+    if (vresult.first == Action::ValidationResult::LEGAL) {
+        env.utilities.logger.debug("action is legal; running");
+        action.run(_players.at(_turn_color), _board);
+    } else {
+        env.utilities.logger.debug("action not valid: " + vresult.second + "; skipping");
     }
 }
 
