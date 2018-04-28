@@ -28,8 +28,7 @@ private:
 
     PlayerColor _turn_color;
 
-    // Return the color of the player's whose turn it currently is, then cycle to the color of the next player
-    PlayerColor cycle(const PlayerColor color);
+    void shift_turn();
 
     void action_run(const Action& action);
     void action_run_if_valid(const Action& action);

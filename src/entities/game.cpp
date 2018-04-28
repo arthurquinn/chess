@@ -4,8 +4,8 @@
 
 using namespace ChessEnv;
 
-Game::PlayerColor Game::cycle(const PlayerColor color) {
-    switch (color) {
+void Game::shift_turn() {
+    switch (_turn_color) {
     case PlayerColor::BLACK:
         _turn_color = PlayerColor::WHITE;
         break;
@@ -13,10 +13,9 @@ Game::PlayerColor Game::cycle(const PlayerColor color) {
         _turn_color = PlayerColor::BLACK;
         break;
     default:
-        // TODO: log some error
+        env.utilities.logger.error("invalid turn color");
         break;
     }
-    return color;
 }
 
 void Game::action_run(const Action& action) {
@@ -32,7 +31,7 @@ void Game::action_run(const Action& action) {
             break;
         case Action::ActionResult::SUCCESS_TURN_COMPLETE:
             env.utilities.logger.debug("action ran; switching turns");
-            _turn_color = cycle(_turn_color);
+            shift_turn();
             break;
         default:
             env.utilities.logger.error("invalid action result");
