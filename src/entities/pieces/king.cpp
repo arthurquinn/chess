@@ -1,5 +1,5 @@
 #include "entities/pieces/king.h"
-
+#include "entities/player.h"
 #include "entities/board.h"
 
 King::King(const BasePiece::PieceColor color, const int r, const int f) : BasePiece(color, r, f) {
@@ -28,4 +28,10 @@ std::shared_ptr<BasePiece> King::clone() const {
 
 void King::print(std::ostream& os) const {
     os << " k" << color_char() << " ";
+}
+
+bool King::in_check(const Board& board, const Player& opponent) const {
+    (void) board;
+    (void) opponent;
+    return false;
 }

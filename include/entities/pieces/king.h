@@ -3,9 +3,10 @@
 
 #include "entities/pieces/base_piece.h"
 
+class Player;
+
 class King : public BasePiece {
 private:
-
 
 public:
     King() = delete;
@@ -17,7 +18,9 @@ public:
 
     virtual void print(std::ostream& os) const override;
 
-    virtual std::shared_ptr<BasePiece> clone() const override; 
+    virtual std::shared_ptr<BasePiece> clone() const override;
+
+    bool in_check(const Board& board, const Player& opponent) const;
 };
 
 
