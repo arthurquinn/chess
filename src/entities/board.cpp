@@ -35,6 +35,7 @@ Board& Board::operator=(Board&& move) {
             }
         }
     }
+    return *this;
 }
 
 void Board::create_minor_row(const PieceFactory& pf, const int row, const PieceColor color) {
