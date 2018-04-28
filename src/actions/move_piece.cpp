@@ -5,37 +5,37 @@
 
 #include <algorithm>
 
-using ActionResponse = Action::ActionResponse;
-using ValidationResponse = Action::ValidationResponse;
+using ValidationResult = Action::ValidationResult;
+using ActionResult = Action::ActionResult;
 
 MovePiece::MovePiece(const Location from, const Location to) : _from(from), _to(to) {
 
 }
 
-ValidationResponse MovePiece::validate(const Player& player, const Board& board) const {
+ValidationResult MovePiece::validate(const Player& player, const Board& board) const {
     const auto& fpiece = board.at(_from);
 
     if (fpiece == nullptr) {
-        return std::make_pair(ValidationResult::ILLEGAL, "no piece at source location");
+        return ValidationResult::ILLEGAL_NULL_PIECE;
     }
 
     if (!player.owns_piece(*fpiece)) {
-        return std::make_pair(ValidationResult::ILLEGAL, "player does not own this piece");
+        return ValidationResult::ILLEGAL_PLAYER_OWNERSHIP;
     }
     
     const auto moves = fpiece->possible_moves(board);
     if (std::find(moves.cbegin(), moves.cend(), _to) == moves.cend()) {
-        return std::make_pair(ValidationResult::ILLEGAL, "this move is not valid");
+        return ValidationResult::ILLEGAL_MOVE;
     }
 
-    return std::make_pair(ValidationResult::LEGAL, "");
+    return ValidationResult::LEGAL;
 }
 
-ActionResponse MovePiece::run(Player& player, Board& board) const {
+ActionResult MovePiece::run(Player& player, Board& board) const {
     (void)player;
 
 
     board.move(_from, _to);
-    return std::make_pair(ActionResult::SUCCESS, "");
+    return ActionResult::SUCCESS_TURN_COMPLETE;
 }
 

@@ -16,8 +16,8 @@ public:
 
     virtual ~QueryMoves() = default;
 
-    ValidationResponse validate(const Player& player, const Board& board) const override;
-    ActionResponse run(Player& player, Board& board) const override;
+    ValidationResult validate(const Player& player, const Board& board) const override;
+    ActionResult run(Player& player, Board& board) const override;
 };
 
 #endif

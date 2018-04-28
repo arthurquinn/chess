@@ -1,5 +1,6 @@
 #include "entities/game.h"
 #include "environment/chess_environment.h"
+#include "interfaces/action.h"
 
 using namespace ChessEnv;
 
@@ -44,12 +45,24 @@ void Game::reset() {
 
 void Game::act(const Action& action) {
     env.utilities.logger.debug("validating action");
-    const auto vresult = action.validate(_players.at(_turn_color), _board);
-    if (vresult.first == Action::ValidationResult::LEGAL) {
-        env.utilities.logger.debug("action is legal; running");
-        action.run(_players.at(_turn_color), _board);
-    } else {
-        env.utilities.logger.debug("action not valid: " + vresult.second + "; skipping");
+
+    const auto& res = action.validate(_players.at(_turn_color), _board);
+    switch (res) {
+        case Action::ValidationResult::ILLEGAL_MOVE:
+            env.utilities.logger.debug("illegal move");
+            break;
+        case Action::ValidationResult::ILLEGAL_NULL_PIECE:
+            env.utilities.logger.debug("no piece at location");
+            break;
+        case Action::ValidationResult::ILLEGAL_PLAYER_OWNERSHIP:
+            env.utilities.logger.debug("player does not own this piece");
+            break;
+        case Action::ValidationResult::LEGAL:
+            action.run(_players.at(_turn_color), _board);
+            break;
+        default:
+            env.utilities.logger.debug("invalid validation result");
+            break;
     }
 }
 

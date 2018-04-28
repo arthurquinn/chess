@@ -3,23 +3,23 @@
 #include "entities/board.h"
 #include "entities/player.h"
 
-using ValidationResponse = Action::ValidationResponse;
-using ActionResponse = Action::ActionResponse;
+using ValidationResult = Action::ValidationResult;
+using ActionResult = Action::ActionResult;
 
 QueryMoves::QueryMoves(const Location qloc) : _qloc(qloc) {
 
 }
 
-ValidationResponse QueryMoves::validate(const Player& player, const Board& board) const {
+ValidationResult QueryMoves::validate(const Player& player, const Board& board) const {
     (void)player;
     (void)board;
 
-    return std::make_pair(ValidationResult::ILLEGAL, "");
+    return ValidationResult::ILLEGAL_MOVE;
 }
 
-ActionResponse QueryMoves::run(Player& player, Board& board) const {
+ActionResult QueryMoves::run(Player& player, Board& board) const {
     (void)board;
     (void)player;
 
-    return std::make_pair(ActionResult::SUCCESS, "");
+    return ActionResult::FAILURE;
 }

@@ -13,21 +13,22 @@ private:
 public:
     enum class ValidationResult {
         LEGAL,
-        ILLEGAL
+        ILLEGAL_NULL_PIECE,
+        ILLEGAL_PLAYER_OWNERSHIP,
+        ILLEGAL_MOVE,
     };
 
     enum class ActionResult {
-        SUCCESS
+        FAILURE,
+        SUCCESS_SAME_TURN,
+        SUCCESS_TURN_COMPLETE,
     };
-
-    using ValidationResponse = std::pair<ValidationResult, std::string>;
-    using ActionResponse = std::pair<ActionResult, std::string>;
 
     Action() = default;
     virtual ~Action() = default;
 
-    virtual ValidationResponse validate(const Player& player, const Board& board) const = 0;
-    virtual ActionResponse run(Player& player, Board& board) const = 0;
+    virtual ValidationResult validate(const Player& player, const Board& board) const = 0;
+    virtual ActionResult run(Player& player, Board& board) const = 0;
 };
 
 #endif
