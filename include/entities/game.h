@@ -31,6 +31,9 @@ private:
     // Return the color of the player's whose turn it currently is, then cycle to the color of the next player
     PlayerColor cycle(const PlayerColor color);
 
+    void action_run(const Action& action);
+    void action_run_if_valid(const Action& action);
+
 public:
     Game() = default;
     virtual ~Game() = default;
