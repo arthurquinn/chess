@@ -22,7 +22,7 @@ const std::vector<BasePiece::Location> Knight::possible_moves(const Board& board
     for (const auto& l : L_MOVES) {
         const auto r = _location.first + l.first;
         const auto f = _location.second + l.second;
-        if (in_bounds(r, f) && (!board.at(r, f) || opposing_colors(*board.at(r, f)))) {
+        if (board.in_bounds(r, f) && (board.empty(r, f) || opposing_colors(board.at(r, f)))) {
             locs.push_back(Location(r, f));
         }
     }

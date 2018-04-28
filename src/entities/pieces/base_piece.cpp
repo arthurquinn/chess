@@ -7,8 +7,12 @@ BasePiece::BasePiece(const PieceColor color, const int r, const int f) :
 
 }
 
-bool BasePiece::in_bounds(const int r, const int f) const {
-    return r - Board::BOARD_DIM < 0 && f - Board::BOARD_DIM < 0;
+char BasePiece::color_char() const {
+    return _color == PieceColor::WHITE ? 'w' : 'b';
+}
+
+bool BasePiece::opposing_colors(const std::unique_ptr<BasePiece>& other) const {
+    return other != nullptr && other->_color != _color;
 }
 
 void BasePiece::move(const int r, const int f) {
@@ -19,12 +23,12 @@ void BasePiece::move(const int r, const int f) {
 void BasePiece::check_path(const Board& board, std::vector<Location>& locs, int r, int f, const int dr, const int df) const {
     r += dr;
     f += df;
-    while (in_bounds(r, f)) {
-        if (!board.at(r, f)) {
+    while (board.in_bounds(r, f)) {
+        if (board.empty(r, f)) {
             locs.push_back(Location(r, f));
             r += dr;
             f += df;
-        } else if (opposing_colors(*board.at(r, f))) {
+        } else if (opposing_colors(board.at(r, f))) {
             locs.push_back(Location(r, f));
             break;
         } else {

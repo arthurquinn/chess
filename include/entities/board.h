@@ -38,6 +38,12 @@ public:
     Board(Board&& move) = delete;
     Board& operator=(Board&& move) = delete;
 
+    bool in_bounds(const int r, const int f) const;
+    bool in_bounds(const Location& location) const;
+
+    bool empty(const int r, const int f) const;
+    bool empty(const Location& location) const;
+
     const BoardData& at(const int r, const int f) const;
     const BoardData& at(const Location& location) const;
 

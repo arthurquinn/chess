@@ -26,6 +26,22 @@ void Board::create_major_row(const PieceFactory& pf, const int row, const PieceC
     _board[row][7] = pf.createRook(color, row, 7);
 }
 
+bool Board::in_bounds(const int r, const int f) const {
+    return r - Board::BOARD_DIM < 0 && f - Board::BOARD_DIM < 0;
+}
+
+bool Board::in_bounds(const Location& location) const {
+    return in_bounds(location.first, location.second);
+}
+
+bool Board::empty(const int r, const int f) const {
+    return at(r, f) == nullptr;
+}
+
+bool Board::empty(const Location& location) const {
+    return empty(location.first, location.second);
+}
+
 const Board::BoardData& Board::at(const int r, const int f) const {
     return _board[r][f];
 }

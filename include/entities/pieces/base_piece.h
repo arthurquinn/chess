@@ -3,6 +3,7 @@
 
 #include <utility>
 #include <vector>
+#include <memory>
 
 #include "interfaces/printable.h"
 
@@ -24,15 +25,8 @@ protected:
     const PieceColor _color;
     Location _location;
 
-    inline char color_char() const {
-        return _color == PieceColor::WHITE ? 'w' : 'b';
-    }
-
-    inline bool opposing_colors(const BasePiece& other) const {
-        return other._color != _color;
-    }
-
-    bool in_bounds(const int rank, const int file) const;
+    char color_char() const;
+    bool opposing_colors(const std::unique_ptr<BasePiece>& other) const;
 
     void check_path(const Board& board, std::vector<Location>& locs, int r, int f, const int dr, const int df) const;
     void check_diagonals(const Board& board, std::vector<Location>& locs) const;

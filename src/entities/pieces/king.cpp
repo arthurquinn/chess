@@ -14,7 +14,7 @@ const std::vector<BasePiece::Location> King::possible_moves(const Board& board) 
             if (dr == 0 && df == 0) continue;
             const int r = _location.first + dr;
             const int f = _location.second + df;
-            if (in_bounds(r, f) && (!board.at(r, f) || opposing_colors(*board.at(r, f)))) {
+            if (board.in_bounds(r, f) && (board.empty(r, f) || opposing_colors(board.at(r, f)))) {
                 locs.push_back(Location(r, f));
             }
         }
