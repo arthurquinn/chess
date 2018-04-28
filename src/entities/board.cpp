@@ -1,37 +1,13 @@
 #include "entities/board.h"
 #include "factories/piece_factory.h"
 #include "entities/pieces/base_piece.h"
+#include "entities/player.h"
 
 #include "environment/chess_environment.h"
 
 #include <cstdlib>
 
 using namespace ChessEnv;
-
-void Board::create_minor_row(const PieceFactory& pf, const int row, const PieceColor color) {
-    int i = 0;
-    for (auto& data : _board[row]) {
-        data = pf.createPawn(color, row, i++);
-    }
-}
-
-void Board::create_major_row(const PieceFactory& pf, const int row, const PieceColor color) {
-    _board[row][0] = pf.createRook(color, row, 0);
-    _board[row][1] = pf.createKnight(color, row, 1);
-    _board[row][2] = pf.createBishop(color, row, 2);
-    _board[row][3] = pf.createQueen(color, row, 3);
-    _board[row][4] = pf.createKing(color, row, 4);
-    _board[row][5] = pf.createBishop(color, row, 5);
-    _board[row][6] = pf.createKnight(color, row, 6);
-    _board[row][7] = pf.createRook(color, row, 7);
-}
-
-bool Board::pre_check(const Location& from, const Location& to) const {
-    (void)from;
-    (void)to;
-
-    return false;
-}
 
 bool Board::in_bounds(const int r, const int f) const {
     return r - Board::BOARD_DIM < 0 && f - Board::BOARD_DIM < 0;
@@ -57,6 +33,14 @@ const Board::BoardData& Board::at(const Location& location) const {
     return at(location.first, location.second);
 }
 
+void Board::place(const BoardData& bd, const Location& location) {
+    place(bd, location.first, location.second);
+}
+
+void Board::place(const BoardData& bd, const int r, const int f) {
+    _board[r][f] = bd;
+}
+
 void Board::move(const int sr, const int sf, const int tr, const int tf) {
     _board[tr][tf] = std::move(_board[sr][sf]);
     if (_board[tr][tf] == nullptr) {
@@ -73,19 +57,9 @@ void Board::move(const Location& sloc, const Location& tloc) {
 void Board::clear() {
     for (auto& row : _board) {
         for (auto& data : row) {
-            data = std::unique_ptr<BasePiece>();
+            data = nullptr;
         }
     }
-}
-
-void Board::setup() {
-    PieceFactory pf;
-
-    clear();
-    create_minor_row(pf, 1, PieceColor::WHITE);
-    create_minor_row(pf, 6, PieceColor::BLACK);
-    create_major_row(pf, 0, PieceColor::WHITE);
-    create_major_row(pf, 7, PieceColor::BLACK);
 }
 
 void Board::print(std::ostream& os) const {

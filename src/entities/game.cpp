@@ -62,11 +62,10 @@ void Game::action_run_if_valid(const Action& action) {
 }
 
 void Game::setup() {
-    _board.setup();
     _players.emplace(PlayerColor::WHITE, PlayerColor::WHITE);
     _players.emplace(PlayerColor::BLACK, PlayerColor::BLACK);
-    _players.at(PlayerColor::WHITE).assign_pieces(_board);
-    _players.at(PlayerColor::BLACK).assign_pieces(_board);
+    _players.at(PlayerColor::WHITE).setup(_board);
+    _players.at(PlayerColor::BLACK).setup(_board);
     _turn_color = PlayerColor::WHITE;
     _state = GameState::READY;
 }
