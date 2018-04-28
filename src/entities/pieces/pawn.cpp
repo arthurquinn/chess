@@ -17,13 +17,13 @@ const std::vector<BasePiece::Location> Pawn::possible_moves(const Board& board) 
     const auto dr = _color == PieceColor::WHITE ? 1 : -1;
     const auto rank = _location.first + dr;
     const auto file = _location.second;
-    if (board.in_bounds(rank, file) && !board.at(rank, file)) {
+    if (board.in_bounds(rank, file) && board.empty(rank, file)) {
         locs.push_back(Location(rank, file));
     }
 
     // First move check
     const auto rank2 = rank + dr;
-    if (!_was_moved && board.in_bounds(rank2, file)) {
+    if (!_was_moved && board.in_bounds(rank2, file) && board.empty(rank, file)) {
         locs.push_back(Location(rank2, file));
     }
 
