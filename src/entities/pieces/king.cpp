@@ -22,6 +22,10 @@ const std::vector<BasePiece::Location> King::possible_moves(const Board& board) 
     return locs;
 }
 
+std::unique_ptr<BasePiece> King::clone() const {
+    return std::make_unique<King>(_color, _location.first, _location.second);
+}
+
 void King::print(std::ostream& os) const {
     os << " k" << color_char() << " ";
 }

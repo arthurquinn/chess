@@ -10,6 +10,10 @@ const std::vector<BasePiece::Location> Rook::possible_moves(const Board& board) 
     return locs;
 }
 
+std::unique_ptr<BasePiece> Rook::clone() const {
+    return std::make_unique<Rook>(_color, _location.first, _location.second);
+}
+
 void Rook::print(std::ostream& os) const {
     os << " r" << color_char() << " ";
 }

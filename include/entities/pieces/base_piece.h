@@ -6,10 +6,11 @@
 #include <memory>
 
 #include "interfaces/printable.h"
+#include "interfaces/cloneable.h"
 
 class Board;
 
-class BasePiece : public Printable {
+class BasePiece : public Printable, public Cloneable<BasePiece> {
 public:
 
     // Location::first is rank
@@ -45,6 +46,8 @@ public:
     virtual const std::vector<Location> possible_moves(const Board& board) const = 0;
 
     virtual void print(std::ostream& os) const = 0;
+
+    virtual std::unique_ptr<BasePiece> clone() const = 0; 
 };
 
 

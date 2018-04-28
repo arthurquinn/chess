@@ -30,13 +30,13 @@ public:
     Board() = default;
     virtual ~Board() = default;
 
-    // Disable copy (we contain unique pointers -- implement deep copy if this is wanted in the future)
-    Board(const Board& copy) = delete;
-    Board& operator=(const Board& copy) = delete;
+    Board(const Board& copy);
+    Board& operator=(const Board& copy);
 
-    // Disable move (this can be added later)
-    Board(Board&& move) = delete;
-    Board& operator=(Board&& move) = delete;
+    Board(Board&& move);
+    Board& operator=(Board&& move);
+
+    bool pre_check(const Location& from, const Location& to) const;
 
     bool in_bounds(const int r, const int f) const;
     bool in_bounds(const Location& location) const;

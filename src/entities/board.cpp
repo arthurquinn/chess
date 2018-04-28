@@ -8,6 +8,35 @@
 
 using namespace ChessEnv;
 
+Board::Board(const Board& copy) {
+    operator=(copy);
+}
+
+Board& Board::operator=(const Board& copy) {
+    if (this != &copy) {
+        for (int i = 0; i < BOARD_DIM; i++) {
+            for (int j = 0; j < BOARD_DIM; j++) {
+                _board[i][j] = copy.empty(i, j) ? copy._board[i][j]->clone() : nullptr;
+            }
+        }
+    }
+    return *this;
+}
+
+Board::Board(Board&& move) {
+    operator=(std::move(move));
+}
+
+Board& Board::operator=(Board&& move) {
+    if (this != &move) {
+        for (int i = 0; i < BOARD_DIM; i++) {
+            for (int j = 0; j < BOARD_DIM; j++) {
+                _board[i][j] = std::move(move._board[i][j]);
+            }
+        }
+    }
+}
+
 void Board::create_minor_row(const PieceFactory& pf, const int row, const PieceColor color) {
     int i = 0;
     for (auto& data : _board[row]) {
@@ -24,6 +53,13 @@ void Board::create_major_row(const PieceFactory& pf, const int row, const PieceC
     _board[row][5] = pf.createBishop(color, row, 5);
     _board[row][6] = pf.createKnight(color, row, 6);
     _board[row][7] = pf.createRook(color, row, 7);
+}
+
+bool Board::pre_check(const Location& from, const Location& to) const {
+    (void)from;
+    (void)to;
+
+    return false;
 }
 
 bool Board::in_bounds(const int r, const int f) const {
