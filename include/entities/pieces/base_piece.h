@@ -10,7 +10,7 @@
 
 class Board;
 
-class BasePiece : public Printable, public Cloneable<BasePiece> {
+class BasePiece : public Printable, public Cloneable<std::shared_ptr<BasePiece>> {
 public:
 
     // Location::first is rank
@@ -27,7 +27,7 @@ protected:
     Location _location;
 
     char color_char() const;
-    bool opposing_colors(const std::unique_ptr<BasePiece>& other) const;
+    bool opposing_colors(const std::shared_ptr<BasePiece>& other) const;
 
     void check_path(const Board& board, std::vector<Location>& locs, int r, int f, const int dr, const int df) const;
     void check_diagonals(const Board& board, std::vector<Location>& locs) const;
@@ -47,7 +47,7 @@ public:
 
     virtual void print(std::ostream& os) const = 0;
 
-    virtual std::unique_ptr<BasePiece> clone() const = 0; 
+    virtual std::shared_ptr<BasePiece> clone() const = 0; 
 };
 
 

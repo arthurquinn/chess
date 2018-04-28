@@ -11,8 +11,8 @@ char BasePiece::color_char() const {
     return _color == PieceColor::WHITE ? 'w' : 'b';
 }
 
-bool BasePiece::opposing_colors(const std::unique_ptr<BasePiece>& other) const {
-    return other != nullptr && other->_color != _color;
+bool BasePiece::opposing_colors(const std::shared_ptr<BasePiece>& other) const {
+    return other && other->_color != _color;
 }
 
 void BasePiece::move(const int r, const int f) {

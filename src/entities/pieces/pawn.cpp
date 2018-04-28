@@ -37,8 +37,8 @@ const std::vector<BasePiece::Location> Pawn::possible_moves(const Board& board) 
     return locs;
 }
 
-std::unique_ptr<BasePiece> Pawn::clone() const {
-    auto p = std::make_unique<Pawn>(_color, _location.first, _location.second);
+std::shared_ptr<BasePiece> Pawn::clone() const {
+    auto p = std::make_shared<Pawn>(_color, _location.first, _location.second);
     p->_was_moved = _was_moved;
     return p;
 }

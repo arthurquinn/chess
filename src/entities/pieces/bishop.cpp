@@ -10,8 +10,8 @@ const std::vector<BasePiece::Location> Bishop::possible_moves(const Board& board
     return locs;
 }
 
-std::unique_ptr<BasePiece> Bishop::clone() const {
-    return std::make_unique<Bishop>(_color, _location.first, _location.second);
+std::shared_ptr<BasePiece> Bishop::clone() const {
+    return std::make_shared<Bishop>(_color, _location.first, _location.second);
 }
 
 void Bishop::print(std::ostream& os) const {

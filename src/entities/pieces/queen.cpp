@@ -11,8 +11,8 @@ const std::vector<BasePiece::Location> Queen::possible_moves(const Board& board)
     return locs;
 }
 
-std::unique_ptr<BasePiece> Queen::clone() const {
-    return std::make_unique<Queen>(_color, _location.first, _location.second);
+std::shared_ptr<BasePiece> Queen::clone() const {
+    return std::make_shared<Queen>(_color, _location.first, _location.second);
 }
 
 void Queen::print(std::ostream& os) const {

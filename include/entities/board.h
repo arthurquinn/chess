@@ -13,7 +13,7 @@ class Board : public Printable {
 public:
     static const int BOARD_DIM { 8 };
 private:
-    using BoardData = std::unique_ptr<BasePiece>;
+    using BoardData = std::shared_ptr<BasePiece>;
     using BoardRow = std::array<BoardData, BOARD_DIM>;
     using BoardGrid = std::array<BoardRow, BOARD_DIM>;
 
@@ -29,12 +29,6 @@ public:
 
     Board() = default;
     virtual ~Board() = default;
-
-    Board(const Board& copy);
-    Board& operator=(const Board& copy);
-
-    Board(Board&& move);
-    Board& operator=(Board&& move);
 
     bool pre_check(const Location& from, const Location& to) const;
 

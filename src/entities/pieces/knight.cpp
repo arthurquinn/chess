@@ -29,8 +29,8 @@ const std::vector<BasePiece::Location> Knight::possible_moves(const Board& board
     return locs;
 }
 
-std::unique_ptr<BasePiece> Knight::clone() const {
-    return std::make_unique<Knight>(_color, _location.first, _location.second);
+std::shared_ptr<BasePiece> Knight::clone() const {
+    return std::make_shared<Knight>(_color, _location.first, _location.second);
 }
 
 void Knight::print(std::ostream& os) const {
