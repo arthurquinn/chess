@@ -1,5 +1,4 @@
 #include "entities/pieces/king.h"
-#include "entities/player.h"
 #include "entities/board.h"
 
 King::King(const BasePiece::PieceColor color, const int r, const int f) : BasePiece(color, r, f) {

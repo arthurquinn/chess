@@ -19,9 +19,10 @@ ValidationResult MovePiece::validate(const Player& player, const Board& board) c
         return ValidationResult::ILLEGAL_NULL_PIECE;
     }
 
-    if (!player.owns_piece(*fpiece)) {
-        return ValidationResult::ILLEGAL_PLAYER_OWNERSHIP;
-    }
+    (void)player;
+    // if (!player.owns_piece(*fpiece)) {
+    //     return ValidationResult::ILLEGAL_PLAYER_OWNERSHIP;
+    // }
     
     const auto moves = fpiece->possible_moves(board);
     if (std::find(moves.cbegin(), moves.cend(), _to) == moves.cend()) {

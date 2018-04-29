@@ -1,40 +1,31 @@
 #ifndef __PLAYER_H
 #define __PLAYER_H
 
+#include <map>
 #include <vector>
+
 #include "entities/pieces/base_piece.h"
 
-class Board;
 class King;
-class PieceFactory;
 
 class Player {
 private:
     using PlayerColor = BasePiece::PieceColor;
-    using Location = BasePiece::Location;
+    using Pieces = std::vector<std::shared_ptr<BasePiece>>;
+    using CapitalPiece = std::shared_ptr<King>;
 
-    const PlayerColor _color;
+    PlayerColor _color { PlayerColor::INVALID };
 
-    std::shared_ptr<King> _king;
+    Pieces _active_pieces;
+    Pieces _graveyard;
 
-    std::vector<std::shared_ptr<BasePiece>> _active_pieces;
-    std::vector<std::shared_ptr<BasePiece>> _graveyard;
-
-    void place_and_add(const std::shared_ptr<BasePiece>& piece, Board& board, const int r, const int f);
-    void create_minor_row(const PieceFactory& pf, Board& board);
-    void create_major_row(const PieceFactory& pf, Board& board);
+    CapitalPiece _king;
 
 public:
-    Player() = delete;
-    Player(const PlayerColor color);
-
+    Player() = default;
     virtual ~Player() = default;
 
-    bool owns_piece(const BasePiece& piece) const;
-
-    const King& king() const;
-
-    void setup(Board& board);
+    Player initialize(const PlayerColor color, const Pieces& starting_pieces, const CapitalPiece& king) const;
 };
 
 

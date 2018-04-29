@@ -39,7 +39,8 @@ public:
 
     virtual ~BasePiece() = default;
 
-    inline PieceColor color() const { return _color; }
+    const Location& get_location() const;
+    PieceColor get_alliance() const;
 
     virtual void move(const int r, const int f);
     

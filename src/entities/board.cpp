@@ -1,13 +1,37 @@
 #include "entities/board.h"
-#include "factories/piece_factory.h"
-#include "entities/pieces/base_piece.h"
-#include "entities/player.h"
 
 #include "environment/chess_environment.h"
 
 #include <cstdlib>
 
 using namespace ChessEnv;
+using PieceColor = BasePiece::PieceColor;
+
+Board::Board(const Board& copy) {
+    operator=(copy);
+}
+
+Board& Board::operator=(const Board& copy) {
+    if (this != &copy) {
+        for (int r = 0; r < BOARD_DIM; r++) {
+            for (int f = 0; f < BOARD_DIM; f++) {
+                if (copy._board[r][f]) {
+                    _board[r][f] = copy._board[r][f]->clone();
+                }
+            }
+        }
+    }
+    return *this;
+}
+
+Board::Board(Board&& move) {
+    (void)move;
+}
+
+Board& Board::operator=(Board&& move) {
+    (void)move;
+    return *this;
+}
 
 bool Board::in_bounds(const int r, const int f) const {
     return r - Board::BOARD_DIM < 0 && f - Board::BOARD_DIM < 0;
@@ -33,14 +57,6 @@ const Board::BoardData& Board::at(const Location& location) const {
     return at(location.first, location.second);
 }
 
-void Board::place(const BoardData& bd, const Location& location) {
-    place(bd, location.first, location.second);
-}
-
-void Board::place(const BoardData& bd, const int r, const int f) {
-    _board[r][f] = bd;
-}
-
 void Board::move(const int sr, const int sf, const int tr, const int tf) {
     _board[tr][tf] = std::move(_board[sr][sf]);
     if (_board[tr][tf] == nullptr) {
@@ -52,6 +68,15 @@ void Board::move(const int sr, const int sf, const int tr, const int tf) {
 
 void Board::move(const Location& sloc, const Location& tloc) {
     move(sloc.first, sloc.second, tloc.first, tloc.second);
+}
+
+Board Board::setup(std::vector<BoardData> pieces) const {
+    Board nboard;
+    for (const auto& piece : pieces) {
+        const auto& loc = piece->get_location();
+        nboard._board[loc.first][loc.second] = piece;
+    }
+    return nboard;
 }
 
 void Board::clear() {

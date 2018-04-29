@@ -29,7 +29,6 @@ target_sources(chess_components
         src/entities/game.cpp
         src/entities/player.cpp
         src/environment/chess_environment.cpp
-        src/factories/piece_factory.cpp
         src/graphics/window.cpp
         src/utilities/logger.cpp
 )

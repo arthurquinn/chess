@@ -1,6 +1,9 @@
 #include "entities/pieces/base_piece.h"
 #include "entities/board.h"
 
+using PieceColor = BasePiece::PieceColor;
+using Location = BasePiece::Location;
+
 BasePiece::BasePiece(const PieceColor color, const int r, const int f) :
         _color(color),
         _location(r, f) {
@@ -54,4 +57,12 @@ void BasePiece::check_across(const Board& board, std::vector<Location>& locs) co
     for (const auto df : d) {
         check_path(board, locs, _location.first, _location.second, 0, df);
     }
+}
+
+PieceColor BasePiece::get_alliance() const {
+    return _color;
+}
+
+const Location& BasePiece::get_location() const {
+    return _location;
 }
