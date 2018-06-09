@@ -26,11 +26,19 @@ public:
     Board(Board&& move) = delete;
     Board& operator=(Board&& move) = delete;
 
+    inline bool in_bounds(const int rank, const int file) const {
+        return rank >= 0 && rank <= 7 && file >= 0 && file <= 7;
+    }
+
+    inline bool empty(const int rank, const int file) const {
+        return _board[rank][file] == nullptr;
+    }
+
     void setup();
 
     void clear();
 
-    
+
 };
 
 #endif

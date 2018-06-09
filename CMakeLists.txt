@@ -14,5 +14,12 @@ target_sources(chess
     PRIVATE
         src/main.cpp
         src/entities/board.cpp
+        src/entities/pieces/base_piece.cpp
+        src/entities/pieces/bishop.cpp
+        src/entities/pieces/king.cpp
+        src/entities/pieces/knight.cpp
+        src/entities/pieces/pawn.cpp
+        src/entities/pieces/queen.cpp
+        src/entities/pieces/rook.cpp
 )
-target_compile_options(chess PUBLIC -std=c++14 -Wall -g -DDEBUG)
+target_compile_options(chess PUBLIC -std=c++14 -Wall -Wextra -g -O0 -DDEBUG)
