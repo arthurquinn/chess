@@ -24,6 +24,13 @@ protected:
     std::vector<Location> check_diagonals(const Board& board) const;
     std::vector<Location> check_across(const Board& board) const;
 
+    inline bool is_opposing(const BasePiece& other) const {
+        return _color != other._color;
+    }
+
+    bool can_move(const Board& board, const int rank, const int file) const;
+    bool can_move(const Board& board, const Location& dest) const;
+
 public:
     BasePiece() = delete;
     BasePiece(const Color color, const Location& location) :

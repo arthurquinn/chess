@@ -8,17 +8,28 @@
 class Board;
 
 class Pawn : public BasePiece {
-private:
-
 public:
     using Location = BasePiece::Location;
     using Color = BasePiece::Color;
 
+private:
+    inline int move_direction() const {
+        return _color == Color::WHITE ? 1 : -1;
+    }
+
+    bool _was_moved { false };
+
+public:
     Pawn() = delete;
     Pawn(const Color color, const Location& location) :
             BasePiece(color, location) {  }
 
     virtual ~Pawn() = default;
+
+    inline virtual void move(const Location& dest) override {
+        BasePiece::move(dest);
+        _was_moved = true;
+    }
 
     virtual std::vector<Location> possible_moves(const Board& board) const override;
 };

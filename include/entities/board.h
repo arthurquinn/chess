@@ -45,6 +45,18 @@ public:
         return _board[rank][file] == nullptr;
     }
 
+    inline bool empty(const Location& location) const {
+        return empty(location.first, location.second);
+    }
+
+    inline const BasePiece& at(const int rank, const int file) const {
+        return *_board[rank][file];
+    }
+
+    inline const BasePiece& at(const Location& location) const {
+        return at(location.first, location.second);
+    }
+
     void setup();
 
     void clear();
