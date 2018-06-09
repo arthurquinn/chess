@@ -4,11 +4,14 @@
 #include "entities/pieces/base_piece.h"
 
 #include <vector>
+#include <map>
+#include <utility>
 
 class Board;
 
 class Knight : public BasePiece {
 private:
+    static const std::array<std::pair<int, int>, 8> L_MOVES;
 
 public:
     using Location = BasePiece::Location;
