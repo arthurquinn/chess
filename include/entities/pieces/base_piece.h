@@ -20,9 +20,9 @@ protected:
     Color _color;
     Location _location;
 
-    std::vector<Location> check_path(const Board& board, const Location& location, const int dr, const int df) const;
-    std::vector<Location> check_diagonals(const Board& board, const Location& location) const;
-    std::vector<Location> check_across(const Board& board, const Location& location) const;
+    std::vector<Location> check_path(const Board& board, const int dr, const int df) const;
+    std::vector<Location> check_diagonals(const Board& board) const;
+    std::vector<Location> check_across(const Board& board) const;
 
 public:
     BasePiece() = default;
