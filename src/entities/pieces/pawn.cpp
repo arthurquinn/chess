@@ -11,16 +11,16 @@ std::vector<Location> Pawn::possible_moves(const Board& board) const {
     const auto& file = _location.second;
 
     if (can_move(board, rank + dr, file)) {
-        locs.push_back(Location(rank + dr, file));
+        locs.emplace_back(rank + dr, file);
     }
 
     if (!_was_moved && can_move(board, rank + dr * 2, file)) {
-        locs.push_back(Location(rank + dr * 2, file));
+        locs.emplace_back(rank + dr * 2, file);
     }
 
     for (const auto& df : { -1, 1 }) {
         if (can_move(board, rank + dr, file + df)) {
-            locs.push_back(Location(rank + dr, file + df));
+            locs.emplace_back(rank + dr, file + df);
         }
     }
     return locs;
