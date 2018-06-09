@@ -17,10 +17,14 @@ std::vector<Location> BasePiece::check_path(const Board& board, const int dr, co
     auto locs = std::vector<Location>();
     auto rank = _location.first + dr;
     auto file = _location.second + df;
-    while (board.in_bounds(rank, file)) {
-        if (board.empty(rank, file)) {
-            locs.emplace_back(rank, file);
+    while (can_move(board, rank, file)) {
+        locs.emplace_back(rank, file);
+
+        // Can move is true; however this is a capture square...cannot move further on this path
+        if (!board.empty(rank, file)) {
+            break;
         }
+
         rank += dr;
         file += df;
     }
