@@ -39,5 +39,9 @@ void Board::setup() {
 }
 
 void Board::clear() {
-
+    for (auto& row : _board) {
+        for (auto& data : row) {
+            data = nullptr;
+        }
+    }
 }
