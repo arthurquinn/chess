@@ -25,7 +25,11 @@ protected:
     std::vector<Location> check_across(const Board& board) const;
 
 public:
-    BasePiece() = default;
+    BasePiece() = delete;
+    BasePiece(const Color color, const Location& location) :
+            _color(color),
+            _location(location) { }
+
     virtual ~BasePiece() = default;
 
     virtual std::vector<Location> possible_moves(const Board& board) const = 0;

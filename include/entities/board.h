@@ -1,12 +1,16 @@
 #ifndef __BOARD_H
 #define __BOARD_H
 
+#include "entities/pieces/base_piece.h"
+
 #include <memory>
 #include <array>
 
-class BasePiece;
-
 class Board {
+public:
+    using Color = BasePiece::Color;
+    using Location = BasePiece::Location;
+
 private:
     static const int BOARD_DIM = 8;
 
@@ -15,6 +19,9 @@ private:
     using BoardGrid = std::array<BoardRow, BOARD_DIM>;
 
     BoardGrid _board;
+
+    void create_minor_row(const Color color, const int rank);
+    void create_major_row(const Color color, const int rank);
 
 public:
     Board();

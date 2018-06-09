@@ -3,6 +3,7 @@
 #include "helpers/stl_helper.h"
 
 using Location = BasePiece::Location;
+using Color = BasePiece::Color;
 
 std::vector<Location> BasePiece::check_path(const Board& board, const int dr, const int df) const {
     auto locs = std::vector<Location>();

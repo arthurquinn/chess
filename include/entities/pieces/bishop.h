@@ -12,8 +12,12 @@ private:
 
 public:
     using Location = BasePiece::Location;
+    using Color = BasePiece::Color;
 
-    Bishop() = default;
+    Bishop() = delete;
+    Bishop(const Color color, const Location& location) 
+            : BasePiece(color, location) {  }
+
     virtual ~Bishop() = default;
 
     virtual std::vector<Location> possible_moves(const Board& board) const override;
