@@ -32,6 +32,10 @@ public:
 
     virtual ~BasePiece() = default;
 
+    inline virtual void move(const Location& dest) {
+        _location = dest;
+    }
+
     virtual std::vector<Location> possible_moves(const Board& board) const = 0;
 };
 

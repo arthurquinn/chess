@@ -45,3 +45,11 @@ void Board::clear() {
         }
     }
 }
+
+void Board::move(const Location& src, const Location& dest) {
+    if (in_bounds(src) && in_bounds(dest)) {
+        _board[dest.first][dest.second] =
+                std::move(_board[src.first][src.second]);
+        _board[dest.first][dest.second]->move(dest);
+    }
+}

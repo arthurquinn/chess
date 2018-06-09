@@ -14,6 +14,7 @@ target_sources(chess
     PRIVATE
         src/main.cpp
         src/entities/board.cpp
+        src/entities/chess.cpp
         src/entities/pieces/base_piece.cpp
         src/entities/pieces/bishop.cpp
         src/entities/pieces/king.cpp

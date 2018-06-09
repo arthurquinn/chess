@@ -37,6 +37,10 @@ public:
         return rank >= 0 && rank <= 7 && file >= 0 && file <= 7;
     }
 
+    inline bool in_bounds(const Location& location) const {
+        return in_bounds(location.first, location.second);
+    }
+
     inline bool empty(const int rank, const int file) const {
         return _board[rank][file] == nullptr;
     }
@@ -45,7 +49,7 @@ public:
 
     void clear();
 
-
+    void move(const Location& src, const Location& dest);
 };
 
 #endif
