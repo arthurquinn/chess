@@ -19,8 +19,11 @@ std::vector<Location> Pawn::possible_moves(const Board& board) const {
     }
 
     for (const auto& df : { -1, 1 }) {
-        if (can_move(board, rank + dr, file + df)) {
-            locs.emplace_back(rank + dr, file + df);
+        const auto& attack_loc = Location(rank + dr, file + df);
+        if (board.in_bounds(attack_loc) &&
+                    board.occupied(attack_loc) &&
+                    board.at(attack_loc).is_adversary(_color)) {
+            locs.emplace_back(attack_loc);
         }
     }
     return locs;

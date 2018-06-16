@@ -43,11 +43,19 @@ public:
     }
 
     inline bool empty(const int rank, const int file) const {
-        return _board[rank][file] == nullptr;
+        return _board.at(rank).at(file) == nullptr;
     }
 
     inline bool empty(const Location& location) const {
         return empty(location.first, location.second);
+    }
+
+    inline bool occupied(const int rank, const int file) const {
+        return !empty(rank, file);
+    }
+
+    inline bool occupied(const Location& location) const {
+        return !empty(location);
     }
 
     inline const BasePiece& at(const int rank, const int file) const {

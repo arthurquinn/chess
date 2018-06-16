@@ -35,7 +35,7 @@ void Chess::possible_moves(const Location& query) {
 
     std::cout << "Possible moves:" << std::endl;
     for (const auto& location : possible) {
-        std::cout << "Location: [" << query.first << ", " << query.second << "]" << std::endl;
+        std::cout << "Location: [" << location.first << ", " << location.second << "]" << std::endl;
     }
 }
 
