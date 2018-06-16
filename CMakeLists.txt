@@ -22,5 +22,8 @@ target_sources(chess
         src/entities/pieces/pawn.cpp
         src/entities/pieces/queen.cpp
         src/entities/pieces/rook.cpp
+        src/io/keyboard.cpp
+        src/io/commands/move_piece.cpp
+        src/io/commands/possible_moves.cpp
 )
 target_compile_options(chess PUBLIC -std=c++14 -Wall -Wextra -g -O0 -DDEBUG)
