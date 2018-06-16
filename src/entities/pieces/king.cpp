@@ -3,6 +3,10 @@
 
 using Location = King::Location;
 
+std::vector<Location> King::possible_moves_no_check(const Board& board) const {
+
+}
+
 std::vector<Location> King::possible_moves(const Board& board) const {
     auto locs = std::vector<Location>();
     const auto& d = { -1, 0, 1 };
@@ -22,4 +26,8 @@ std::vector<Location> King::possible_moves(const Board& board) const {
 
 void King::print(std::ostream& os) const {
     common_print(os, 'k');
+}
+
+std::unique_ptr<BasePiece> King::clone() const {
+    return std::make_unique<King>(*this);
 }

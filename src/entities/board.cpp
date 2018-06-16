@@ -13,6 +13,23 @@ using Location = Board::Location;
 Board::Board() = default;
 Board::~Board() = default;
 
+Board::Board(const Board& rhs) {
+    operator=(rhs);
+}
+
+Board& Board::operator=(const Board& rhs) {
+    if (this != &rhs) {
+        for (auto i = 0; i < BOARD_DIM; i++) {
+            for (auto j = 0; j < BOARD_DIM; j++) {
+                if (rhs.occupied(i, j)) {
+                    _board[i][j] = rhs.at(i, j).clone();
+                }
+            }
+        }
+    }
+    return *this;
+}
+
 void Board::create_minor_row(const Color color, const int rank) {
     for (int file = 0; file < BOARD_DIM; file++) {
         _board[rank][file] = std::make_unique<Pawn>(color, Location(rank, file));

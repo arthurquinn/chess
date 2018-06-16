@@ -28,8 +28,8 @@ public:
     Board();
     virtual ~Board();
 
-    Board(const Board& copy) = delete;
-    Board& operator=(const Board& copy) = delete;
+    Board(const Board& rhs);
+    Board& operator=(const Board& rhs);
 
     Board(Board&& move) = delete;
     Board& operator=(Board&& move) = delete;

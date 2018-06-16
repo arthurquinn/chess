@@ -23,9 +23,12 @@ public:
 
     virtual ~Knight() = default;
 
+    virtual std::vector<Location> possible_moves_no_check(const Board& board) const override;
     virtual std::vector<Location> possible_moves(const Board& board) const override;
 
     virtual void print(std::ostream& os) const override;
+
+    virtual std::unique_ptr<BasePiece> clone() const override;
 };
 
 #endif

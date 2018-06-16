@@ -3,6 +3,10 @@
 
 using Location = Pawn::Location;
 
+std::vector<Location> Pawn::possible_moves_no_check(const Board& board) const {
+    
+}
+
 std::vector<Location> Pawn::possible_moves(const Board& board) const {
     auto locs = std::vector<Location>();
 
@@ -31,4 +35,8 @@ std::vector<Location> Pawn::possible_moves(const Board& board) const {
 
 void Pawn::print(std::ostream& os) const {
     common_print(os, 'p');
+}
+
+std::unique_ptr<BasePiece> Pawn::clone() const {
+    return std::make_unique<Pawn>(*this);
 }

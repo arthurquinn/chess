@@ -1,6 +1,7 @@
 #ifndef __BASE_PIECE_H
 #define __BASE_PIECE_H
 
+#include "interfaces/cloneable.h"
 #include "interfaces/printable.h"
 
 #include <utility>
@@ -8,7 +9,7 @@
 
 class Board;
 
-class BasePiece : public Printable {
+class BasePiece : public Printable, public Cloneable<BasePiece> {
 public:
     using Location = std::pair<int, int>;
 
@@ -61,6 +62,7 @@ public:
         return !is_allied(other);
     }
 
+    virtual std::vector<Location> possible_moves_no_check(const Board& board) const = 0;
     virtual std::vector<Location> possible_moves(const Board& board) const = 0;
 };
 

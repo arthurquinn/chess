@@ -21,6 +21,8 @@ public:
 
     void initialize();
 
+    // TODO: eventually these should return results to the calling commands
+    //          and not output to stdout
     void move_piece(const Location& src, const Location& dest);
     void possible_moves(const Location& query) const;
 

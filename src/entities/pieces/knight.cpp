@@ -14,6 +14,10 @@ const std::array<std::pair<int, int>, 8> Knight::L_MOVES = {
     std::make_pair(-2, -1)
 };
 
+std::vector<Location> Knight::possible_moves_no_check(const Board& board) const {
+    
+}
+
 std::vector<Location> Knight::possible_moves(const Board& board) const {
     auto locs = std::vector<Location>();
     for (const auto& l : L_MOVES) {
@@ -29,3 +33,8 @@ std::vector<Location> Knight::possible_moves(const Board& board) const {
 void Knight::print(std::ostream& os) const {
     common_print(os, 'n');
 }
+
+std::unique_ptr<BasePiece> Knight::clone() const {
+    return std::make_unique<Knight>(*this);
+}
+

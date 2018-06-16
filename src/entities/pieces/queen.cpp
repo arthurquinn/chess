@@ -4,6 +4,10 @@
 
 using Location = Queen::Location;
 
+std::vector<Location> Queen::possible_moves_no_check(const Board& board) const {
+    
+}
+
 std::vector<Location> Queen::possible_moves(const Board& board) const {
     auto locs = std::vector<Location>();
     STL_Helper::append_vectors(locs, check_across(board));
@@ -13,4 +17,8 @@ std::vector<Location> Queen::possible_moves(const Board& board) const {
 
 void Queen::print(std::ostream& os) const {
     common_print(os, 'q');
+}
+
+std::unique_ptr<BasePiece> Queen::clone() const {
+    return std::make_unique<Queen>(*this);
 }
