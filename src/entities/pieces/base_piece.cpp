@@ -6,7 +6,7 @@ using Location = BasePiece::Location;
 using Color = BasePiece::Color;
 
 bool BasePiece::can_move(const Board& board, const int rank, const int file) const {
-    return board.in_bounds(rank, file) && ( board.empty(rank, file) || is_opposing(board.at(rank, file)) );
+    return board.in_bounds(rank, file) && ( board.empty(rank, file) || is_adversary(board.at(rank, file)) );
 }
 
 bool BasePiece::can_move(const Board& board, const Location& dest) const {

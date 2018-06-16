@@ -7,8 +7,9 @@
 class Chess {
 private:
     using Color = BasePiece::Color;
+    using Location = BasePiece::Location;
 
-    Color _turn_color;
+    Color _turn_color { Color::INVALID };
     Board _board;
 
 public:
@@ -17,6 +18,8 @@ public:
 
     void initialize();
 
+    void move_piece(const Location& src, const Location& dest);
+    void possible_moves(const Location& query);
 };
 
 #endif

@@ -15,6 +15,7 @@ target_sources(chess
         src/main.cpp
         src/entities/board.cpp
         src/entities/chess.cpp
+        src/entities/game.cpp
         src/entities/pieces/base_piece.cpp
         src/entities/pieces/bishop.cpp
         src/entities/pieces/king.cpp
@@ -23,6 +24,7 @@ target_sources(chess
         src/entities/pieces/queen.cpp
         src/entities/pieces/rook.cpp
         src/io/keyboard.cpp
+        src/io/logger.cpp
         src/io/commands/move_piece.cpp
         src/io/commands/possible_moves.cpp
 )
