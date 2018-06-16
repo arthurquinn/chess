@@ -19,3 +19,7 @@ std::vector<Location> King::possible_moves(const Board& board) const {
     }
     return locs;
 }
+
+void King::print(std::ostream& os) const {
+    common_print(os, 'k');
+}

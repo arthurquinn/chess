@@ -3,6 +3,8 @@
 #include "io/keyboard.h"
 #include "interfaces/command.h"
 
+#include <iostream>
+
 Game::Game() = default;
 Game::~Game() = default;
 
@@ -15,8 +17,10 @@ void Game::initialize() {
 
 void Game::run() const {
 
+    _chess->print(std::cout);
     // TODO: implement interrupt mechanism
     for (;;) {
         _controller->getCommand()->run(*_chess);
+        _chess->print(std::cout);
     }
 }

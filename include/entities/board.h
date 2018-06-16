@@ -2,11 +2,12 @@
 #define __BOARD_H
 
 #include "entities/pieces/base_piece.h"
+#include "interfaces/printable.h"
 
 #include <memory>
 #include <array>
 
-class Board {
+class Board : public Printable {
 public:
     using Color = BasePiece::Color;
     using Location = BasePiece::Location;
@@ -62,6 +63,8 @@ public:
     void clear();
 
     void move(const Location& src, const Location& dest);
+
+    virtual void print(std::ostream& os) const override;
 };
 
 #endif

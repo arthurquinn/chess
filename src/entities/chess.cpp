@@ -39,3 +39,7 @@ void Chess::possible_moves(const Location& query) {
     }
 }
 
+void Chess::print(std::ostream& os) const {
+    _board.print(os);
+}
+

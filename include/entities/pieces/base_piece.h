@@ -1,12 +1,14 @@
 #ifndef __BASE_PIECE_H
 #define __BASE_PIECE_H
 
+#include "interfaces/printable.h"
+
 #include <utility>
 #include <vector>
 
 class Board;
 
-class BasePiece {
+class BasePiece : public Printable {
 public:
     using Location = std::pair<int, int>;
 
@@ -26,6 +28,10 @@ protected:
 
     bool can_move(const Board& board, const int rank, const int file) const;
     bool can_move(const Board& board, const Location& dest) const;
+
+    inline void common_print(std::ostream& os, const char piece_char) const {
+        os << (_color == Color::WHITE ? "w" : "b") << piece_char;
+    }
 
 public:
     BasePiece() = delete;

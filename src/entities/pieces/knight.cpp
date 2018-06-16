@@ -25,3 +25,7 @@ std::vector<Location> Knight::possible_moves(const Board& board) const {
     }
     return locs;
 }
+
+void Knight::print(std::ostream& os) const {
+    common_print(os, 'n');
+}

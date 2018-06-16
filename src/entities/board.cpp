@@ -32,9 +32,9 @@ void Board::create_major_row(const Color color, const int rank) {
 }
 
 void Board::setup() {
-    create_minor_row(Color::WHITE, 0);
-    create_minor_row(Color::BLACK, 7);
-    create_major_row(Color::WHITE, 1);
+    create_minor_row(Color::WHITE, 1);
+    create_minor_row(Color::BLACK, 6);
+    create_major_row(Color::WHITE, 0);
     create_major_row(Color::BLACK, 7);
 }
 
@@ -52,4 +52,28 @@ void Board::move(const Location& src, const Location& dest) {
                 std::move(_board[src.first][src.second]);
         _board[dest.first][dest.second]->move(dest);
     }
+}
+
+void Board::print(std::ostream& os) const {
+    char rank = '8';
+    auto row = _board.crbegin();
+    for (; row != _board.crend(); row++) {
+        os << rank-- << " ";
+        for (const auto& data : *row) {
+            if (data) {
+                os << " ";
+                data->print(os);
+                os << " ";
+            } else {
+                os << " -- ";
+            }
+        }
+        os << std::endl;
+    }
+    char file = 'a';
+    os << "   ";
+    for (; file < 'i'; file++) {
+        os << file << "   ";
+    }
+
 }

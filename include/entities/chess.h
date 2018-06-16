@@ -3,8 +3,9 @@
 
 #include "entities/board.h"
 #include "entities/pieces/base_piece.h"
+#include "interfaces/printable.h"
 
-class Chess {
+class Chess : public Printable {
 private:
     using Color = BasePiece::Color;
     using Location = BasePiece::Location;
@@ -20,6 +21,8 @@ public:
 
     void move_piece(const Location& src, const Location& dest);
     void possible_moves(const Location& query);
+
+    virtual void print(std::ostream& os) const override;
 };
 
 #endif

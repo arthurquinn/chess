@@ -10,3 +10,7 @@ std::vector<Location> Queen::possible_moves(const Board& board) const {
     STL_Helper::append_vectors(locs, check_diagonals(board));
     return locs;
 }
+
+void Queen::print(std::ostream& os) const {
+    common_print(os, 'q');
+}
