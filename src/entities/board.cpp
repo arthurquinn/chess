@@ -75,5 +75,5 @@ void Board::print(std::ostream& os) const {
     for (; file < 'i'; file++) {
         os << file << "   ";
     }
-
+    os << std::endl;
 }
