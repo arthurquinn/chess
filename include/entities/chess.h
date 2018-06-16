@@ -13,6 +13,8 @@ private:
     Color _turn_color { Color::INVALID };
     Board _board;
 
+    Color adversial_color(const Color color) const;
+
 public:
     Chess() = default;
     virtual ~Chess() = default;
@@ -20,7 +22,7 @@ public:
     void initialize();
 
     void move_piece(const Location& src, const Location& dest);
-    void possible_moves(const Location& query);
+    void possible_moves(const Location& query) const;
 
     virtual void print(std::ostream& os) const override;
 };
