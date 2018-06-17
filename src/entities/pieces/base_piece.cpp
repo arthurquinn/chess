@@ -13,7 +13,7 @@ Color BasePiece::adversarial_color(const Color color) {
         return Color::BLACK;
     case Color::BLACK:
         return Color::WHITE;
-    case Color::INVALID:
+    default:
         return Color::INVALID;
     }
 }
