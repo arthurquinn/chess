@@ -45,7 +45,29 @@ void Board::create_major_row(const Color color, const int rank) {
     _board[rank][5] = std::make_unique<Bishop>(color, Location(rank, 5));
     _board[rank][6] = std::make_unique<Knight>(color, Location(rank, 6));
     _board[rank][7] = std::make_unique<Rook>(color, Location(rank, 7));
+}
 
+std::vector<Location> Board::piece_locations(const Color color) const {
+    std::vector<Location> pieces;
+    for (auto i = 0; i < BOARD_DIM; i++) {
+        for (auto j = 0; j < BOARD_DIM; j++) {
+            if (occupied(i, j) && at(i,j).is_allied(color)) {
+                pieces.emplace_back(i, j);
+            }
+        }
+    }
+    return pieces;
+}
+
+Location Board::king_location(const Color color) const {
+    for (auto i = 0; i < BOARD_DIM; i++) {
+        for (auto j = 0; j < BOARD_DIM; j++) {
+            if (occupied(i, j) && at(i,j).is_king() && at(i, j).is_allied(color)) {
+                return Location(i, j);
+            }
+        }
+    }
+    return Location(-1, -1); // This should be a game breaking error
 }
 
 void Board::setup() {

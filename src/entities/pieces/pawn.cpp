@@ -4,10 +4,6 @@
 using Location = Pawn::Location;
 
 std::vector<Location> Pawn::possible_moves_no_check(const Board& board) const {
-    
-}
-
-std::vector<Location> Pawn::possible_moves(const Board& board) const {
     auto locs = std::vector<Location>();
 
     const auto& dr = move_direction();

@@ -13,8 +13,6 @@ private:
     Color _turn_color { Color::INVALID };
     Board _board;
 
-    Color adversial_color(const Color color) const;
-
 public:
     Chess() = default;
     virtual ~Chess() = default;

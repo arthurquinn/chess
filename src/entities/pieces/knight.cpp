@@ -15,10 +15,6 @@ const std::array<std::pair<int, int>, 8> Knight::L_MOVES = {
 };
 
 std::vector<Location> Knight::possible_moves_no_check(const Board& board) const {
-    
-}
-
-std::vector<Location> Knight::possible_moves(const Board& board) const {
     auto locs = std::vector<Location>();
     for (const auto& l : L_MOVES) {
         const auto& rank = _location.first + l.first;

@@ -6,17 +6,6 @@
 using Color = BasePiece::Color;
 using Location = BasePiece::Location;
 
-Color Chess::adversial_color(const Color color) const {
-    switch (_turn_color) {
-    case Color::WHITE:
-        return Color::BLACK;
-    case Color::BLACK:
-        return Color::WHITE;
-    default:
-        return Color::INVALID;
-    }
-}
-
 void Chess::initialize() {
     _turn_color = Color::WHITE;
     _board.setup();
@@ -39,7 +28,7 @@ void Chess::move_piece(const Location& src, const Location& dest) {
     }
 
     _board.move(src, dest);
-    _turn_color = adversial_color(_turn_color);
+    _turn_color = BasePiece::adversarial_color(_turn_color);
 }
 
 void Chess::possible_moves(const Location& query) const {

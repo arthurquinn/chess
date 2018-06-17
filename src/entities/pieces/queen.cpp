@@ -5,10 +5,6 @@
 using Location = Queen::Location;
 
 std::vector<Location> Queen::possible_moves_no_check(const Board& board) const {
-    
-}
-
-std::vector<Location> Queen::possible_moves(const Board& board) const {
     auto locs = std::vector<Location>();
     STL_Helper::append_vectors(locs, check_across(board));
     STL_Helper::append_vectors(locs, check_diagonals(board));

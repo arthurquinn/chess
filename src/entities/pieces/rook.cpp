@@ -4,10 +4,6 @@
 using Location = Rook::Location;
 
 std::vector<Location> Rook::possible_moves_no_check(const Board& board) const {
-    
-}
-
-std::vector<Location> Rook::possible_moves(const Board& board) const {
     return check_across(board);
 }
 

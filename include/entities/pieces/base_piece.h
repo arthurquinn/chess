@@ -19,6 +19,8 @@ public:
         WHITE
     };
 
+    static Color adversarial_color(const Color color);
+
 protected:
     Color _color;
     Location _location;
@@ -62,8 +64,11 @@ public:
         return !is_allied(other);
     }
 
+    std::vector<Location> possible_moves(const Board& board) const;
+
     virtual std::vector<Location> possible_moves_no_check(const Board& board) const = 0;
-    virtual std::vector<Location> possible_moves(const Board& board) const = 0;
+
+    virtual bool is_king() const = 0;
 };
 
 #endif
