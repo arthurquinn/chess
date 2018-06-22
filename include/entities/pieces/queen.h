@@ -25,6 +25,8 @@ public:
     virtual void print(std::ostream& os) const override;
 
     virtual std::unique_ptr<Piece> clone() const override;
+
+    inline virtual void accept(const PieceVisitor& visitor) const override { visitor.visit(*this); }
 };
 
 #endif

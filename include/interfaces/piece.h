@@ -3,6 +3,7 @@
 
 #include "interfaces/cloneable.h"
 #include "interfaces/printable.h"
+#include "interfaces/visitors/piece_visitor.h"
 
 #include <vector>
 
@@ -27,6 +28,8 @@ public:
 
     virtual std::vector<Location> possible_moves(const Board& board) const = 0;
     virtual std::vector<Location> possible_moves_no_check(const Board& board) const = 0;
+
+    virtual void accept(const PieceVisitor& visitor) const = 0;
 
     // Default methods
     inline bool is_allied(const Color other) const { return color() == other; }
