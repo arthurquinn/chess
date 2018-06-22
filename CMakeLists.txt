@@ -13,6 +13,8 @@ target_link_libraries(chess ${SDL2_LIBRARIES})
 target_sources(chess 
     PRIVATE
         src/main.cpp
+        src/commands/move_piece.cpp
+        src/commands/possible_moves.cpp
         src/entities/board.cpp
         src/entities/chess.cpp
         src/entities/game.cpp
@@ -25,7 +27,5 @@ target_sources(chess
         src/entities/pieces/rook.cpp
         src/io/keyboard.cpp
         src/io/logger.cpp
-        src/io/commands/move_piece.cpp
-        src/io/commands/possible_moves.cpp
 )
 target_compile_options(chess PUBLIC -std=c++14 -Wall -Wextra -g -O0 -DDEBUG)

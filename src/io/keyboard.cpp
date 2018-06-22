@@ -1,6 +1,6 @@
 #include "io/keyboard.h"
-#include "io/commands/move_piece.h"
-#include "io/commands/possible_moves.h"
+#include "commands/move_piece.h"
+#include "commands/possible_moves.h"
 
 #include <sstream>
 #include <iostream>

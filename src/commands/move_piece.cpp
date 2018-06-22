@@ -1,4 +1,4 @@
-#include "io/commands/move_piece.h"
+#include "commands/move_piece.h"
 #include "entities/chess.h"
 
 void MovePiece::run(Chess& chess) const {
