@@ -27,5 +27,6 @@ target_sources(chess
         src/entities/pieces/rook.cpp
         src/io/keyboard.cpp
         src/io/logger.cpp
+        src/visitors/castle_visitor.cpp
 )
 target_compile_options(chess PUBLIC -std=c++14 -Wall -Wextra -g -O0 -DDEBUG)
