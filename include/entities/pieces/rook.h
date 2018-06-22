@@ -9,7 +9,7 @@ class Board;
 
 class Rook : public BasePiece {
 private:
-    bool _was_moved = false;
+    bool _was_moved { false };
 
 public:
     using Location = BasePiece::Location;
