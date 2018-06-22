@@ -71,14 +71,16 @@ std::vector<Location> BasePiece::possible_moves(const Board& board) const {
     auto moves = possible_moves_no_check(board);
     STL_Helper::filter_vector(moves, [this, &board] (const auto& dest) {
         
-        // Perform move
-        auto simulation = board;
-        simulation.move(_location, dest);
+        (void)dest;
+        // // Perform move
+        // auto simulation = board;
+        // simulation.move(_location, dest);
 
-        // Check if any opponent pieces can capture allied king
-        const auto& allied_king_loc = simulation.king_location(_color);
-        const auto* const allied_king = dynamic_cast<const King* const>(&simulation.at(allied_king_loc));
-        return allied_king->in_check(simulation);
+        // // Check if any opponent pieces can capture allied king
+        // const auto& allied_king_loc = simulation.king_location(_color);
+        // const auto* const allied_king = dynamic_cast<const King* const>(&simulation.at(allied_king_loc));
+        // return allied_king->in_check(simulation);
+        return true; // TODO: fixme
     });
     return moves;
 }

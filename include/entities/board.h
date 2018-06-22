@@ -66,9 +66,6 @@ public:
         return at(location.first, location.second);
     }
 
-    Location king_location(const Color color) const;
-    std::vector<Location> piece_locations(const Color color) const;
-
     void setup();
 
     void clear();
