@@ -13,7 +13,7 @@ std::vector<Location> King::possible_moves_no_check(const Board& board) const {
 
             const auto& rank = _location.first + dr;
             const auto& file = _location.second + df;
-            if (board.in_bounds(rank, file) && board.empty(rank, file)) {
+            if (can_move(board, rank, file)) {
                 locs.emplace_back(rank, file);
             }
         }

@@ -10,11 +10,11 @@ std::vector<Location> Pawn::possible_moves_no_check(const Board& board) const {
     const auto& rank = _location.first;
     const auto& file = _location.second;
 
-    if (can_move(board, rank + dr, file)) {
+    if ( board.in_bounds(rank + dr, file) && board.empty(rank + dr, file) ) {
         locs.emplace_back(rank + dr, file);
     }
 
-    if (!_was_moved && can_move(board, rank + dr * 2, file)) {
+    if ( !_was_moved && ( board.in_bounds(rank + dr * 2, file) && board.empty(rank + dr * 2, file) ) ) {
         locs.emplace_back(rank + dr * 2, file);
     }
 

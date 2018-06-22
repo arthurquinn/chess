@@ -19,7 +19,7 @@ std::vector<Location> Knight::possible_moves_no_check(const Board& board) const 
     for (const auto& l : L_MOVES) {
         const auto& rank = _location.first + l.first;
         const auto& file = _location.second + l.second;
-        if (board.in_bounds(rank, file) && board.empty(rank, file)) {
+        if (can_move(board, rank, file)) {
             locs.emplace_back(rank, file);
         }
     }

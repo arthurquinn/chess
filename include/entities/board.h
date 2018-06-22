@@ -59,7 +59,7 @@ public:
     }
 
     inline const BasePiece& at(const int rank, const int file) const {
-        return *_board[rank][file];
+        return *_board.at(rank).at(file);
     }
 
     inline const BasePiece& at(const Location& location) const {
