@@ -30,7 +30,7 @@ void Knight::print(std::ostream& os) const {
     common_print(os, 'n');
 }
 
-std::unique_ptr<BasePiece> Knight::clone() const {
+std::unique_ptr<Piece> Knight::clone() const {
     return std::make_unique<Knight>(*this);
 }
 

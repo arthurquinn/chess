@@ -1,12 +1,12 @@
 #ifndef __MOVE_PIECE_H
 #define __MOVE_PIECE_H
 
-#include "entities/pieces/base_piece.h"
+#include "interfaces/piece.h"
 #include "interfaces/command.h"
 
 class MovePiece : public Command {
 public:
-    using Location = BasePiece::Location;
+    using Location = Piece::Location;
 
 private:
     Location _src;

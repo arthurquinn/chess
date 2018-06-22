@@ -3,8 +3,19 @@
 #include <iostream>
 #include <algorithm>
 
-using Color = BasePiece::Color;
-using Location = BasePiece::Location;
+using Color = Piece::Color;
+using Location = Piece::Location;
+
+Color Chess::adversarial_color(const Color color) {
+    switch (color) {
+    case Color::WHITE:
+        return Color::BLACK;
+    case Color::BLACK:
+        return Color::WHITE;
+    default:
+        return Color::INVALID;
+    }
+}
 
 void Chess::initialize() {
     _turn_color = Color::WHITE;
@@ -28,7 +39,7 @@ void Chess::move_piece(const Location& src, const Location& dest) {
     }
 
     _board.move(src, dest);
-    _turn_color = BasePiece::adversarial_color(_turn_color);
+    _turn_color = adversarial_color(_turn_color);
 }
 
 void Chess::possible_moves(const Location& query) const {

@@ -37,6 +37,6 @@ void King::print(std::ostream& os) const {
     common_print(os, 'k');
 }
 
-std::unique_ptr<BasePiece> King::clone() const {
+std::unique_ptr<Piece> King::clone() const {
     return std::make_unique<King>(*this);
 }

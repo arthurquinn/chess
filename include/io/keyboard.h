@@ -2,7 +2,7 @@
 #define __KEYBOARD_H
 
 #include "interfaces/controller.h"
-#include "entities/pieces/base_piece.h"
+#include "interfaces/piece.h"
 
 #include <memory>
 #include <vector>
@@ -15,7 +15,7 @@ private:
     using opt = std::experimental::optional<T>;
 
     using TokenList = std::vector<std::string>;
-    using Location = BasePiece::Location;
+    using Location = Piece::Location;
 
     inline unsigned char file2ordinal(const unsigned char file) const {
         return tolower(file) - 97;

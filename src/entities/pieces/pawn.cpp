@@ -33,6 +33,6 @@ void Pawn::print(std::ostream& os) const {
     common_print(os, 'p');
 }
 
-std::unique_ptr<BasePiece> Pawn::clone() const {
+std::unique_ptr<Piece> Pawn::clone() const {
     return std::make_unique<Pawn>(*this);
 }

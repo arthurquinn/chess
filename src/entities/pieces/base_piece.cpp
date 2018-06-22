@@ -7,17 +7,6 @@
 using Location = BasePiece::Location;
 using Color = BasePiece::Color;
 
-Color BasePiece::adversarial_color(const Color color) {
-    switch (color) {
-    case Color::WHITE:
-        return Color::BLACK;
-    case Color::BLACK:
-        return Color::WHITE;
-    default:
-        return Color::INVALID;
-    }
-}
-
 bool BasePiece::can_move(const Board& board, const int rank, const int file) const {
     return board.in_bounds(rank, file) && ( board.empty(rank, file) || is_adversary(board.at(rank, file)) );
 }

@@ -1,7 +1,7 @@
 #ifndef __BOARD_H
 #define __BOARD_H
 
-#include "entities/pieces/base_piece.h"
+#include "interfaces/piece.h"
 #include "interfaces/printable.h"
 
 #include <memory>
@@ -9,13 +9,13 @@
 
 class Board : public Printable {
 public:
-    using Color = BasePiece::Color;
-    using Location = BasePiece::Location;
+    using Color = Piece::Color;
+    using Location = Piece::Location;
 
 private:
     static const int BOARD_DIM = 8;
 
-    using BoardData = std::unique_ptr<BasePiece>;
+    using BoardData = std::unique_ptr<Piece>;
     using BoardRow = std::array<BoardData, BOARD_DIM>;
     using BoardGrid = std::array<BoardRow, BOARD_DIM>;
 
@@ -58,11 +58,11 @@ public:
         return !empty(location);
     }
 
-    inline const BasePiece& at(const int rank, const int file) const {
+    inline const Piece& at(const int rank, const int file) const {
         return *_board.at(rank).at(file);
     }
 
-    inline const BasePiece& at(const Location& location) const {
+    inline const Piece& at(const Location& location) const {
         return at(location.first, location.second);
     }
 

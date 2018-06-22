@@ -11,6 +11,6 @@ void Rook::print(std::ostream& os) const {
     common_print(os, 'r');
 }
 
-std::unique_ptr<BasePiece> Rook::clone() const {
+std::unique_ptr<Piece> Rook::clone() const {
     return std::make_unique<Rook>(*this);
 }

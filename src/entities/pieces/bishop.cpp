@@ -11,6 +11,6 @@ void Bishop::print(std::ostream& os) const {
     common_print(os, 'b');
 }
 
-std::unique_ptr<BasePiece> Bishop::clone() const {
+std::unique_ptr<Piece> Bishop::clone() const {
     return std::make_unique<Bishop>(*this);
 }

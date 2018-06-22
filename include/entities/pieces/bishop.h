@@ -24,7 +24,7 @@ public:
 
     virtual void print(std::ostream& os) const override;
 
-    virtual std::unique_ptr<BasePiece> clone() const override;
+    virtual std::unique_ptr<Piece> clone() const override;
 };
 
 #endif

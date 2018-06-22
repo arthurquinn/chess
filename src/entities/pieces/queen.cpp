@@ -15,6 +15,6 @@ void Queen::print(std::ostream& os) const {
     common_print(os, 'q');
 }
 
-std::unique_ptr<BasePiece> Queen::clone() const {
+std::unique_ptr<Piece> Queen::clone() const {
     return std::make_unique<Queen>(*this);
 }
