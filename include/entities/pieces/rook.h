@@ -9,6 +9,7 @@ class Board;
 
 class Rook : public BasePiece {
 private:
+    bool _was_moved = false;
 
 public:
     using Location = BasePiece::Location;
@@ -19,6 +20,11 @@ public:
             BasePiece(color, location) {  }
 
     virtual ~Rook() = default;
+
+    inline virtual void move(const Location& dest) override {
+        BasePiece::move(dest);
+        _was_moved = true;
+    }
 
     virtual std::vector<Location> possible_moves_no_check(const Board& board) const override;
 

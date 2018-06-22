@@ -9,6 +9,7 @@ class Board;
 
 class King : public BasePiece {
 private:
+    bool _was_moved { false };
 
 public:
     using Location = BasePiece::Location;
@@ -19,6 +20,11 @@ public:
             BasePiece(color, location) {  }
 
     virtual ~King() = default;
+
+    inline virtual void move(const Location& dest) override {
+        BasePiece::move(dest);
+        _was_moved = true;
+    }
 
     bool in_check(const Board& board) const;
 
