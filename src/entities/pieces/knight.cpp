@@ -1,6 +1,7 @@
 #include "entities/pieces/knight.h"
 #include "entities/board.h"
 #include "conceptual/moves/basic_move.h"
+#include "conceptual/moves/capture_move.h"
 #include "interfaces/visitors/piece_visitor.h"
 
 template<typename T>
@@ -24,6 +25,9 @@ vec_uptr<Move> Knight::possible_moves_no_check(const Board& board) const {
         const auto& file = _location.file() + l.second;
         if (can_move(board, rank, file)) {
             moves.push_back(std::make_unique<BasicMove>(_color, _location, Location(rank, file)));
+        }
+        else if (can_capture(board, rank, file)) {
+            moves.push_back(std::make_unique<CaptureMove>(_color, _location, Location(rank, file)));
         }
     }
     return moves;

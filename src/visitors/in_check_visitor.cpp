@@ -7,27 +7,28 @@
 #include "entities/pieces/rook.h"
 
 void InCheckVisitor::visit(const Bishop& piece) {
-    (void)piece;
-}
+    if (piece.is_adversary(_color)) {
 
-void InCheckVisitor::visit(const King& piece) {
-    if (piece.is_allied(_color)) {
-        if (piece.in_check())
+
     }
 }
 
+void InCheckVisitor::visit(const King& piece) {
+
+}
+
 void InCheckVisitor::visit(const Knight& piece) {
-    (void)piece;
+
 }
 
 void InCheckVisitor::visit(const Pawn& piece) {
-    (void)piece;
+
 }
 
 void InCheckVisitor::visit(const Queen& piece) {
-    (void)piece;
+
 }
 
 void InCheckVisitor::visit(const Rook& piece) {
-    (void)piece;
+
 }

@@ -18,6 +18,7 @@ target_sources(chess
         src/commands/possible_moves.cpp
         src/conceptual/location.cpp
         src/conceptual/moves/basic_move.cpp
+        src/conceptual/moves/capture_move.cpp
         src/conceptual/moves/castle_move.cpp
         src/entities/board.cpp
         src/entities/game.cpp
@@ -31,5 +32,6 @@ target_sources(chess
         src/io/keyboard.cpp
         src/io/logger.cpp
         src/visitors/castle_visitor.cpp
+        src/visitors/in_check_visitor.cpp
 )
 target_compile_options(chess PUBLIC -std=c++14 -Wall -Wextra -g -O0 -DDEBUG)

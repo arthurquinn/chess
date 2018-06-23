@@ -1,6 +1,7 @@
 #include "entities/pieces/king.h"
 #include "entities/board.h"
 #include "conceptual/moves/basic_move.h"
+#include "conceptual/moves/capture_move.h"
 #include "helpers/stl_helper.h"
 #include "interfaces/visitors/piece_visitor.h"
 
@@ -20,6 +21,9 @@ vec_uptr<Move> King::possible_moves_no_check(const Board& board) const {
             const auto& file = _location.file() + df;
             if (can_move(board, rank, file)) {
                 moves.push_back(std::make_unique<BasicMove>(_color, _location, Location(rank, file)));
+            }
+            else if (can_capture(board, rank, file)) {
+                moves.push_back(std::make_unique<CaptureMove>(_color, _location, Location(rank, file)));
             }
         }
     }

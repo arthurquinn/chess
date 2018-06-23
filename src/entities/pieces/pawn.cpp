@@ -1,6 +1,7 @@
 #include "entities/pieces/pawn.h"
 #include "entities/board.h"
 #include "conceptual/moves/basic_move.h"
+#include "conceptual/moves/capture_move.h"
 #include "interfaces/visitors/piece_visitor.h"
 
 template<typename T>
@@ -26,7 +27,8 @@ vec_uptr<Move> Pawn::possible_moves_no_check(const Board& board) const {
         if (board.in_bounds(attack_loc) &&
                     board.occupied(attack_loc) &&
                     board.at(attack_loc).is_adversary(_color)) {
-            moves.push_back(std::make_unique<BasicMove>(_color, _location, attack_loc));
+
+            moves.push_back(std::make_unique<CaptureMove>(_color, _location, attack_loc));
         }
     }
     return moves;

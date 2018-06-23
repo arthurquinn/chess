@@ -21,6 +21,9 @@ protected:
     vec_uptr<Move> check_diagonals(const Board& board) const;
     vec_uptr<Move> check_across(const Board& board) const;
 
+    bool can_capture(const Board& board, const int rank, const int file) const;
+    bool can_capture(const Board& board, const Location& dest) const;
+
     bool can_move(const Board& board, const int rank, const int file) const;
     bool can_move(const Board& board, const Location& dest) const;
 

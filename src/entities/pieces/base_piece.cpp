@@ -4,14 +4,23 @@
 #include "helpers/stl_helper.h"
 #include "visitors/castle_visitor.h"
 #include "conceptual/moves/basic_move.h"
+#include "conceptual/moves/capture_move.h"
 
 template<typename T>
 using vec_uptr = Piece::vec_uptr<T>;
 
 using Color = BasePiece::Color;
 
+bool BasePiece::can_capture(const Board& board, const int rank, const int file) const {
+    return board.in_bounds(rank, file) && is_adversary(board.at(rank, file));
+}
+
+bool BasePiece::can_capture(const Board& board, const Location& dest) const {
+    return  can_capture(board, dest.rank(), dest.file());
+}
+
 bool BasePiece::can_move(const Board& board, const int rank, const int file) const {
-    return board.in_bounds(rank, file) && ( board.empty(rank, file) || is_adversary(board.at(rank, file)) );
+    return board.in_bounds(rank, file) && board.empty(rank, file);
 }
 
 bool BasePiece::can_move(const Board& board, const Location& dest) const {
@@ -25,13 +34,11 @@ vec_uptr<Move> BasePiece::check_path(const Board& board, const int dr, const int
     while (can_move(board, rank, file)) {
         moves.push_back(std::make_unique<BasicMove>(_color, _location, Location(rank, file)));
 
-        // Can move is true; however this is a capture square...cannot move further on this path
-        if (!board.empty(rank, file)) {
-            break;
-        }
-
         rank += dr;
         file += df;
+    }
+    if (can_capture(board, rank, file)) {
+        moves.push_back(std::make_unique<CaptureMove>(_color, _location, Location(rank, file)));
     }
     return moves;
 }
