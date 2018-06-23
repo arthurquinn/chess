@@ -13,13 +13,13 @@ target_link_libraries(chess ${SDL2_LIBRARIES})
 target_sources(chess 
     PRIVATE
         src/main.cpp
+        src/algorithms/chess.cpp
         src/commands/move_piece.cpp
         src/commands/possible_moves.cpp
         src/conceptual/location.cpp
         src/conceptual/moves/basic_move.cpp
         src/conceptual/moves/castle_move.cpp
         src/entities/board.cpp
-        src/entities/chess.cpp
         src/entities/game.cpp
         src/entities/pieces/base_piece.cpp
         src/entities/pieces/bishop.cpp

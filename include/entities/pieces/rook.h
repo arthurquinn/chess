@@ -9,21 +9,21 @@ class Board;
 
 class Rook : public BasePiece {
 public:
+    using Color = BasePiece::Color;
+
     enum class CastleState {
-        CAN_CASTLE_QUEENSIDE,
-        CAN_CASTLE_KINGSIDE,
-        CANNOT_CASTLE
+        CANNOT_CASTLE,
+        IN_POSITION_QUEENSIDE,
+        IN_POSITION_KINGSIDE
     };
 
 private:
+    static const unsigned int KINGSIDE_FILE = 7;
+    static const unsigned int QUEENSIDE_FILE = 0;
+
     bool _was_moved { false };
 
-    CastleState check_black_castle() const;
-    CastleState check_white_castle() const;
-
 public:
-    using Color = BasePiece::Color;
-
     Rook() = delete;
     Rook(const Color color, const Location& location) :
             BasePiece(color, location) {  }
@@ -42,6 +42,16 @@ public:
     virtual void print(std::ostream& os) const override;
 
     virtual void accept(PieceVisitor& visitor) const override;
+
+    unsigned int starting_rank() const;
+
+    inline bool is_kingside() const {
+        return !_was_moved && _location.rank() == starting_rank() && _location.file() == KINGSIDE_FILE;
+    }
+
+    inline bool is_queenside() const {
+        return !_was_moved && _location.rank() == starting_rank() && _location.file() == QUEENSIDE_FILE;
+    }
 
     CastleState castle_state() const;
 };

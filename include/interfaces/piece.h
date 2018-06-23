@@ -28,7 +28,7 @@ public:
 
     virtual void move(const Location& dest) = 0;
 
-    virtual Color color() const = 0;
+    virtual Color get_color() const = 0;
 
     virtual vec_uptr<Move> possible_moves(const Board& board) const = 0;
     virtual vec_uptr<Move> possible_moves_no_check(const Board& board) const = 0;
@@ -36,10 +36,10 @@ public:
     virtual void accept(PieceVisitor& visitor) const = 0;
 
     // Default methods
-    inline bool is_allied(const Color other) const { return color() == other; }
+    inline bool is_allied(const Color other) const { return get_color() == other; }
     inline bool is_adversary(const Color other) const { return !is_allied(other); }
 
-    inline bool is_allied(const Piece& other) const { return color() == other.color(); }
+    inline bool is_allied(const Piece& other) const { return get_color() == other.get_color(); }
     inline bool is_adversary(const Piece& other) const { return !is_allied(other); }
 };
 

@@ -3,10 +3,13 @@
 #include "interfaces/move.h"
 #include "interfaces/visitors/piece_visitor.h"
 
+#include <climits>
+
 template<typename T>
 using vec_uptr = Piece::vec_uptr<T>;
 
 using CastleState = Rook::CastleState;
+using Color = Piece::Color;
 
 vec_uptr<Move> Rook::possible_moves_no_check(const Board& board) const {
     return check_across(board);
@@ -20,38 +23,26 @@ std::unique_ptr<Piece> Rook::clone() const {
     return std::make_unique<Rook>(*this);
 }
 
-CastleState Rook::check_black_castle() const {
-    if (_location.rank() == 7 && _location.file() == 0) {
-        return CastleState::CAN_CASTLE_QUEENSIDE;
-    }
-    if (_location.rank() == 7 && _location.file() == 7) {
-        return CastleState::CAN_CASTLE_KINGSIDE;
-    }
-    return CastleState::CANNOT_CASTLE;
-}
+unsigned int Rook::starting_rank() const {
+    switch (_color) {
+    case Color::WHITE:
+        return 0;
+    
+    case Color::BLACK:
+        return 7;
 
-CastleState Rook::check_white_castle() const {
-    if (_location.rank() == 0 && _location.file() == 0) {
-        return CastleState::CAN_CASTLE_QUEENSIDE;
+    default:
+        // TODO: some error
+        return UINT_MAX;
     }
-    if (_location.rank() == 0 && _location.file() == 7) {
-        return CastleState::CAN_CASTLE_KINGSIDE;
-    }
-    return CastleState::CANNOT_CASTLE;
 }
 
 CastleState Rook::castle_state() const {
-    if (!_was_moved) {
-        switch (_color) {
-        case Color::WHITE:
-            return check_white_castle();
-
-        case Color::BLACK:
-            return check_black_castle();
-
-        default:
-            break; // TODO: add some error here
-        }
+    if (is_kingside()) {
+        return CastleState::IN_POSITION_KINGSIDE;
+    }
+    if (is_queenside()) {
+        return CastleState::IN_POSITION_QUEENSIDE;
     }
     return CastleState::CANNOT_CASTLE;
 }

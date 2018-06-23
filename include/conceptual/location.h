@@ -3,8 +3,8 @@
 
 class Location {
 private:
-    unsigned int _rank;
-    unsigned int _file;
+    int _rank;
+    int _file;
 
 public:
     Location() = default;

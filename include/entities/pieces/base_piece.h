@@ -38,7 +38,7 @@ public:
 
     inline virtual void move(const Location& dest) override { _location = dest; }
 
-    inline virtual Color color() const override { return _color; }
+    inline virtual Color get_color() const override { return _color; }
 
     vec_uptr<Move> possible_moves(const Board& board) const override;
 };

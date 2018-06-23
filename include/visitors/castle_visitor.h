@@ -9,7 +9,7 @@ public:
     using Color = Piece::Color;
 
 private:
-    Color _color;
+    const Color _color;
 
     const Rook* _kingside_rook { nullptr };
     const Rook* _queenside_rook { nullptr };
@@ -29,7 +29,13 @@ public:
     virtual void visit(const Queen& piece) override;
     virtual void visit(const Rook& piece) override;
 
+    inline bool has_king() const { return _king != nullptr; }
+    inline bool has_kingside_rook() const { return _kingside_rook != nullptr; }
+    inline bool has_queenside_rook() const { return _queenside_rook != nullptr; }
 
+    inline const King& get_king() const { return *_king; }
+    inline const Rook& get_kingside_rook() const { return *_kingside_rook; }
+    inline const Rook& get_queenside_rook() const { return *_queenside_rook; }
 };
 
 #endif

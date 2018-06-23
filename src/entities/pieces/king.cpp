@@ -46,10 +46,14 @@ std::unique_ptr<Piece> King::clone() const {
     return std::make_unique<King>(*this);
 }
 
-CastleState King::castle_state() const {
-    return _was_moved ? CastleState::CANNOT_CASTLE : CastleState::CAN_CASTLE;
-}
-
 void King::accept(PieceVisitor& visitor) const {
     visitor.visit(*this);
+}
+
+CastleState King::castle_state() const {
+    return _was_moved ? CastleState::CANNOT_CASTLE : CastleState::IN_POSITION;
+}
+
+bool King::in_check(const Board& board) const {
+    
 }

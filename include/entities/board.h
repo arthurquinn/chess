@@ -33,8 +33,8 @@ public:
     Board(const Board& rhs);
     Board& operator=(const Board& rhs);
 
-    Board(Board&& move) = delete;
-    Board& operator=(Board&& move) = delete;
+    Board(Board&& rhs) = delete;
+    Board& operator=(Board&& rhs) = delete;
 
     inline bool in_bounds(const int rank, const int file) const {
         return rank >= 0 && rank <= 7 && file >= 0 && file <= 7;

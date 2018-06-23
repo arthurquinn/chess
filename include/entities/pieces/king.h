@@ -10,8 +10,8 @@ class Board;
 class King : public BasePiece {
 public:
     enum class CastleState {
-        CAN_CASTLE,
-        CANNOT_CASTLE
+        CANNOT_CASTLE,
+        IN_POSITION
     };
 
 private:
@@ -40,6 +40,8 @@ public:
     virtual void accept(PieceVisitor& visitor) const override;
 
     CastleState castle_state() const;
+
+    bool in_check(const Board& board) const;
 };
 
 #endif
