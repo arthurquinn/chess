@@ -13,12 +13,12 @@ public:
     PieceVisitor() = default;
     virtual ~PieceVisitor() = default;
 
-    virtual void visit(const Bishop& piece) const = 0;
-    virtual void visit(const King& piece) const = 0;
-    virtual void visit(const Knight& piece) const = 0;
-    virtual void visit(const Pawn& piece) const = 0;
-    virtual void visit(const Queen& piece) const = 0;
-    virtual void visit(const Rook& piece) const = 0;
+    virtual void visit(const Bishop& piece) = 0;
+    virtual void visit(const King& piece) = 0;
+    virtual void visit(const Knight& piece) = 0;
+    virtual void visit(const Pawn& piece) = 0;
+    virtual void visit(const Queen& piece) = 0;
+    virtual void visit(const Rook& piece) = 0;
 };
 
 #endif

@@ -1,13 +1,10 @@
 #ifndef __POSSIBLE_MOVES_H
 #define __POSSIBLE_MOVES_H
 
-#include "interfaces/piece.h"
 #include "interfaces/command.h"
+#include "conceptual/location.h"
 
 class PossibleMoves : public Command {
-public:
-    using Location = Piece::Location;
-
 private:
     Location _query;
 

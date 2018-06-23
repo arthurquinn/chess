@@ -8,7 +8,6 @@
 #include "entities/pieces/rook.h"
 
 using Color = Board::Color;
-using Location = Board::Location;
 
 Board::Board() = default;
 Board::~Board() = default;
@@ -64,9 +63,17 @@ void Board::clear() {
 
 void Board::move(const Location& src, const Location& dest) {
     if (in_bounds(src) && in_bounds(dest)) {
-        _board[dest.first][dest.second] =
-                std::move(_board[src.first][src.second]);
-        _board[dest.first][dest.second]->move(dest);
+        _board[dest.rank()][dest.file()] =
+                std::move(_board[src.rank()][src.file()]);
+        _board[dest.rank()][dest.file()]->move(dest);
+    }
+}
+
+void Board::visit_pieces(PieceVisitor& visitor) const {
+    for (const auto& row : _board) {
+        for (const auto& data : row) {
+            data->accept(visitor);
+        }
     }
 }
 

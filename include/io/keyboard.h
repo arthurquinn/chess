@@ -9,13 +9,14 @@
 #include <string>
 #include <experimental/optional>
 
+class Location;
+
 class Keyboard : public Controller {
 private:
     template<typename T>
     using opt = std::experimental::optional<T>;
 
     using TokenList = std::vector<std::string>;
-    using Location = Piece::Location;
 
     inline unsigned char file2ordinal(const unsigned char file) const {
         return tolower(file) - 97;

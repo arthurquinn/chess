@@ -2,9 +2,12 @@
 #include "entities/pieces/king.h"
 #include "entities/board.h"
 #include "helpers/stl_helper.h"
+#include "visitors/castle_visitor.h"
+#include "conceptual/moves/basic_move.h"
 
+template<typename T>
+using vec_uptr = Piece::vec_uptr<T>;
 
-using Location = BasePiece::Location;
 using Color = BasePiece::Color;
 
 bool BasePiece::can_move(const Board& board, const int rank, const int file) const {
@@ -12,15 +15,15 @@ bool BasePiece::can_move(const Board& board, const int rank, const int file) con
 }
 
 bool BasePiece::can_move(const Board& board, const Location& dest) const {
-    return can_move(board, dest.first, dest.second);
+    return can_move(board, dest.rank(), dest.file());
 }
 
-std::vector<Location> BasePiece::check_path(const Board& board, const int dr, const int df) const {
-    auto locs = std::vector<Location>();
-    auto rank = _location.first + dr;
-    auto file = _location.second + df;
+vec_uptr<Move> BasePiece::check_path(const Board& board, const int dr, const int df) const {
+    vec_uptr<Move> moves;
+    auto rank = _location.rank() + dr;
+    auto file = _location.file() + df;
     while (can_move(board, rank, file)) {
-        locs.emplace_back(rank, file);
+        moves.push_back(std::make_unique<BasicMove>(_color, _location, Location(rank, file)));
 
         // Can move is true; however this is a capture square...cannot move further on this path
         if (!board.empty(rank, file)) {
@@ -30,46 +33,40 @@ std::vector<Location> BasePiece::check_path(const Board& board, const int dr, co
         rank += dr;
         file += df;
     }
-    return locs;
+    return moves;
 }
 
-std::vector<Location> BasePiece::check_diagonals(const Board& board) const {
-    auto locs = std::vector<Location>();
+vec_uptr<Move> BasePiece::check_diagonals(const Board& board) const {
+    vec_uptr<Move> moves;
     const auto& d = { 1, -1 };
     for (const auto& dr : d) {
         for (const auto& df : d) {
-            STL_Helper::append_vectors(locs, check_path(board, dr, df));
+            STL_Helper::merge_vectors(moves, check_path(board, dr, df));
         }
     }
-    return locs;
+    return moves;
 }
 
-std::vector<Location> BasePiece::check_across(const Board& board) const {
-    auto locs = std::vector<Location>();
+vec_uptr<Move> BasePiece::check_across(const Board& board) const {
+    vec_uptr<Move> moves;
     const auto& d = { 1, -1 };
     for (const auto& dr : d) {
-        STL_Helper::append_vectors(locs, check_path(board, dr, 0));
+        STL_Helper::merge_vectors(moves, check_path(board, dr, 0));
     }
     for (const auto& df : d) {
-        STL_Helper::append_vectors(locs, check_path(board, 0, df));
+        STL_Helper::merge_vectors(moves, check_path(board, 0, df));
     }
-    return locs;
+    return moves;
 }
 
-std::vector<Location> BasePiece::possible_moves(const Board& board) const {
+vec_uptr<Move> BasePiece::possible_moves(const Board& board) const {
     auto moves = possible_moves_no_check(board);
-    STL_Helper::filter_vector(moves, [this, &board] (const auto& dest) {
-        
-        (void)dest;
-        // // Perform move
-        // auto simulation = board;
-        // simulation.move(_location, dest);
 
-        // // Check if any opponent pieces can capture allied king
-        // const auto& allied_king_loc = simulation.king_location(_color);
-        // const auto* const allied_king = dynamic_cast<const King* const>(&simulation.at(allied_king_loc));
-        // return allied_king->in_check(simulation);
-        return true; // TODO: fixme
-    });
+    CastleVisitor castler(_color);
+    board.visit_pieces(castler);
+
+    // TODO: implement
+    // STL_Helper::append_vectors(moves, castler.evaluate(board));
+
     return moves;
 }

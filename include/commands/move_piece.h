@@ -1,13 +1,10 @@
 #ifndef __MOVE_PIECE_H
 #define __MOVE_PIECE_H
 
-#include "interfaces/piece.h"
 #include "interfaces/command.h"
+#include "conceptual/location.h"
 
 class MovePiece : public Command {
-public:
-    using Location = Piece::Location;
-
 private:
     Location _src;
     Location _dest;

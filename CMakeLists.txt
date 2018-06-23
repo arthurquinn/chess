@@ -15,6 +15,9 @@ target_sources(chess
         src/main.cpp
         src/commands/move_piece.cpp
         src/commands/possible_moves.cpp
+        src/conceptual/location.cpp
+        src/conceptual/moves/basic_move.cpp
+        src/conceptual/moves/castle_move.cpp
         src/entities/board.cpp
         src/entities/chess.cpp
         src/entities/game.cpp

@@ -1,24 +1,29 @@
 #include "entities/pieces/king.h"
 #include "entities/board.h"
+#include "conceptual/moves/basic_move.h"
 #include "helpers/stl_helper.h"
+#include "interfaces/visitors/piece_visitor.h"
 
-using Location = King::Location;
+template<typename T>
+using vec_uptr = Piece::vec_uptr<T>;
 
-std::vector<Location> King::possible_moves_no_check(const Board& board) const {
-    auto locs = std::vector<Location>();
+using CastleState = King::CastleState;
+
+vec_uptr<Move> King::possible_moves_no_check(const Board& board) const {
+    vec_uptr<Move> moves;
     const auto& d = { -1, 0, 1 };
     for (const auto& dr : d) {
         for (const auto& df : d) {
             if (dr == 0 && df == 0) continue;
 
-            const auto& rank = _location.first + dr;
-            const auto& file = _location.second + df;
+            const auto& rank = _location.rank() + dr;
+            const auto& file = _location.file() + df;
             if (can_move(board, rank, file)) {
-                locs.emplace_back(rank, file);
+                moves.push_back(std::make_unique<BasicMove>(_color, _location, Location(rank, file)));
             }
         }
     }
-    return locs;
+    return moves;
 }
 
 // TODO: fixme
@@ -39,4 +44,12 @@ void King::print(std::ostream& os) const {
 
 std::unique_ptr<Piece> King::clone() const {
     return std::make_unique<King>(*this);
+}
+
+CastleState King::castle_state() const {
+    return _was_moved ? CastleState::CANNOT_CASTLE : CastleState::CAN_CASTLE;
+}
+
+void King::accept(PieceVisitor& visitor) const {
+    visitor.visit(*this);
 }

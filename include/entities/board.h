@@ -3,14 +3,16 @@
 
 #include "interfaces/piece.h"
 #include "interfaces/printable.h"
+#include "conceptual/location.h"
 
 #include <memory>
 #include <array>
 
+class PieceVisitor;
+
 class Board : public Printable {
 public:
     using Color = Piece::Color;
-    using Location = Piece::Location;
 
 private:
     static const int BOARD_DIM = 8;
@@ -39,7 +41,7 @@ public:
     }
 
     inline bool in_bounds(const Location& location) const {
-        return in_bounds(location.first, location.second);
+        return in_bounds(location.rank(), location.file());
     }
 
     inline bool empty(const int rank, const int file) const {
@@ -47,7 +49,7 @@ public:
     }
 
     inline bool empty(const Location& location) const {
-        return empty(location.first, location.second);
+        return empty(location.rank(), location.file());
     }
 
     inline bool occupied(const int rank, const int file) const {
@@ -63,7 +65,7 @@ public:
     }
 
     inline const Piece& at(const Location& location) const {
-        return at(location.first, location.second);
+        return at(location.rank(), location.file());
     }
 
     void setup();
@@ -71,6 +73,8 @@ public:
     void clear();
 
     void move(const Location& src, const Location& dest);
+
+    void visit_pieces(PieceVisitor& visitor) const;
 
     virtual void print(std::ostream& os) const override;
 };

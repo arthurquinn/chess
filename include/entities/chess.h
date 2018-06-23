@@ -8,7 +8,6 @@
 class Chess : public Printable {
 private:
     using Color = Piece::Color;
-    using Location = Piece::Location;
 
     Color _turn_color { Color::INVALID };
     Board _board;

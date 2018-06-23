@@ -8,11 +8,16 @@
 class Board;
 
 class King : public BasePiece {
+public:
+    enum class CastleState {
+        CAN_CASTLE,
+        CANNOT_CASTLE
+    };
+
 private:
     bool _was_moved { false };
 
 public:
-    using Location = BasePiece::Location;
     using Color = BasePiece::Color;
 
     King() = delete;
@@ -26,13 +31,15 @@ public:
         _was_moved = true;
     }
 
-    virtual std::vector<Location> possible_moves_no_check(const Board& board) const override;
+    virtual vec_uptr<Move> possible_moves_no_check(const Board& board) const override;
 
     virtual void print(std::ostream& os) const override;
 
     virtual std::unique_ptr<Piece> clone() const override;
 
-    inline virtual void accept(const PieceVisitor& visitor) const override { visitor.visit(*this); }
+    virtual void accept(PieceVisitor& visitor) const override;
+
+    CastleState castle_state() const;
 };
 
 #endif

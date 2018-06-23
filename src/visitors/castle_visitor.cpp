@@ -6,26 +6,42 @@
 #include "entities/pieces/queen.h"
 #include "entities/pieces/rook.h"
 
-void CastleVisitor::visit(const Bishop& piece) const {
+void CastleVisitor::visit(const Bishop& piece) {
     
 }
 
-void CastleVisitor::visit(const King& piece) const {
+void CastleVisitor::visit(const King& piece) {
+    if (piece.is_allied(_color) && piece.castle_state() == King::CastleState::CAN_CASTLE) {
+        _king = &piece;
+    }
+}
+
+void CastleVisitor::visit(const Knight& piece) {
     
 }
 
-void CastleVisitor::visit(const Knight& piece) const {
+void CastleVisitor::visit(const Pawn& piece) {
     
 }
 
-void CastleVisitor::visit(const Pawn& piece) const {
+void CastleVisitor::visit(const Queen& piece) {
     
 }
 
-void CastleVisitor::visit(const Queen& piece) const {
-    
-}
+void CastleVisitor::visit(const Rook& piece) {
+    if (piece.is_allied(_color)) {
+        switch (piece.castle_state()) {
 
-void CastleVisitor::visit(const Rook& piece) const {
-    
+        case Rook::CastleState::CAN_CASTLE_KINGSIDE:
+            _kingside_rook = &piece;
+            break;
+
+        case Rook::CastleState::CAN_CASTLE_QUEENSIDE:
+            _queenside_rook = &piece;
+            break;
+
+        default:
+            break;
+        }
+    }
 }

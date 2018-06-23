@@ -3,15 +3,19 @@
 
 #include "interfaces/cloneable.h"
 #include "interfaces/printable.h"
-#include "interfaces/visitors/piece_visitor.h"
 
 #include <vector>
+#include <memory>
 
 class Board;
+class Move;
+class PieceVisitor;
+class Location;
 
 class Piece : public Printable, public Cloneable<Piece> {
 public:
-    using Location = std::pair<int, int>;
+    template<typename T>
+    using vec_uptr = std::vector<std::unique_ptr<T>>;
 
     enum class Color {
         INVALID,
@@ -26,10 +30,10 @@ public:
 
     virtual Color color() const = 0;
 
-    virtual std::vector<Location> possible_moves(const Board& board) const = 0;
-    virtual std::vector<Location> possible_moves_no_check(const Board& board) const = 0;
+    virtual vec_uptr<Move> possible_moves(const Board& board) const = 0;
+    virtual vec_uptr<Move> possible_moves_no_check(const Board& board) const = 0;
 
-    virtual void accept(const PieceVisitor& visitor) const = 0;
+    virtual void accept(PieceVisitor& visitor) const = 0;
 
     // Default methods
     inline bool is_allied(const Color other) const { return color() == other; }

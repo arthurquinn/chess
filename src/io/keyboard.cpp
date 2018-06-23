@@ -1,6 +1,7 @@
 #include "io/keyboard.h"
 #include "commands/move_piece.h"
 #include "commands/possible_moves.h"
+#include "conceptual/location.h"
 
 #include <sstream>
 #include <iostream>
@@ -17,7 +18,7 @@ Keyboard::TokenList Keyboard::split(const std::string& str, const char delim) co
     return tokens;
 }
 
-Keyboard::opt<Keyboard::Location> Keyboard::parse_loc(const std::string& str) const {
+Keyboard::opt<Location> Keyboard::parse_loc(const std::string& str) const {
     if (str.size() == 2) {
         const auto r = rank2ordinal(str.at(1));
         const auto f = file2ordinal(str.at(0));

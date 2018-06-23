@@ -8,11 +8,20 @@
 class Board;
 
 class Rook : public BasePiece {
+public:
+    enum class CastleState {
+        CAN_CASTLE_QUEENSIDE,
+        CAN_CASTLE_KINGSIDE,
+        CANNOT_CASTLE
+    };
+
 private:
     bool _was_moved { false };
 
+    CastleState check_black_castle() const;
+    CastleState check_white_castle() const;
+
 public:
-    using Location = BasePiece::Location;
     using Color = BasePiece::Color;
 
     Rook() = delete;
@@ -26,13 +35,15 @@ public:
         _was_moved = true;
     }
 
-    virtual std::vector<Location> possible_moves_no_check(const Board& board) const override;
-
-    virtual void print(std::ostream& os) const override;
+    virtual vec_uptr<Move> possible_moves_no_check(const Board& board) const override;
 
     virtual std::unique_ptr<Piece> clone() const override;
 
-    inline virtual void accept(const PieceVisitor& visitor) const override { visitor.visit(*this); }
+    virtual void print(std::ostream& os) const override;
+
+    virtual void accept(PieceVisitor& visitor) const override;
+
+    CastleState castle_state() const;
 };
 
 #endif

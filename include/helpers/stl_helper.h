@@ -16,6 +16,11 @@ public:
         v1.insert(v1.end(), v2.cbegin(), v2.cend());
     }
 
+    template<typename T>
+    inline static void merge_vectors(std::vector<T>& v1, std::vector<T>&& v2) {
+        std::move(std::begin(v2), std::end(v2), std::back_inserter(v1));
+    }
+
     template<typename T, typename Predicate>
     inline static void filter_vector(std::vector<T>& v, const Predicate& predicate) {
         v.erase(std::remove_if(v.begin(), v.end(), predicate), v.end());

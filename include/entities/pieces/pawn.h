@@ -9,7 +9,6 @@ class Board;
 
 class Pawn : public BasePiece {
 public:
-    using Location = BasePiece::Location;
     using Color = BasePiece::Color;
 
 private:
@@ -31,13 +30,13 @@ public:
         _was_moved = true;
     }
 
-    virtual std::vector<Location> possible_moves_no_check(const Board& board) const override;
+    virtual vec_uptr<Move> possible_moves_no_check(const Board& board) const override;
 
     virtual void print(std::ostream& os) const override;
 
     virtual std::unique_ptr<Piece> clone() const override;
 
-    inline virtual void accept(const PieceVisitor& visitor) const override { visitor.visit(*this); }
+    virtual void accept(PieceVisitor& visitor) const override;
 };
 
 #endif
