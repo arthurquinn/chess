@@ -35,7 +35,7 @@ public:
         _was_moved = true;
     }
 
-    virtual vec_uptr<Move> possible_moves_no_check(const Board& board) const override;
+    virtual std::vector<Location> line_of_sight(const Board& board) const override;
 
     virtual std::unique_ptr<Piece> clone() const override;
 

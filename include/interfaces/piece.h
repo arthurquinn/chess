@@ -3,14 +3,16 @@
 
 #include "interfaces/cloneable.h"
 #include "interfaces/printable.h"
+#include "helpers/stl_helper.h"
+#include "conceptual/location.h"
 
 #include <vector>
 #include <memory>
 
 class Board;
 class Move;
+class CaptureMove;
 class PieceVisitor;
-class Location;
 
 class Piece : public Printable, public Cloneable<Piece> {
 public:
@@ -30,12 +32,17 @@ public:
 
     virtual Color get_color() const = 0;
 
-    virtual vec_uptr<Move> possible_moves(const Board& board) const = 0;
-    virtual vec_uptr<Move> possible_moves_no_check(const Board& board) const = 0;
+    virtual vec_uptr<Move> legal_moves(const Board& board) const = 0;
+
+    virtual std::vector<Location> line_of_sight(const Board& board) const = 0;
 
     virtual void accept(PieceVisitor& visitor) const = 0;
 
     // Default methods
+    inline bool in_line_of_sight(const Location& location, const Board& board) const {
+        return STL_Helper::vector_contains(line_of_sight(board), location);
+    }
+
     inline bool is_allied(const Color other) const { return get_color() == other; }
     inline bool is_adversary(const Color other) const { return !is_allied(other); }
 

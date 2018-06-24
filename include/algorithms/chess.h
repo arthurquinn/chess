@@ -27,6 +27,10 @@ public:
     ~Chess() = delete;
 
     static vec_uptr<Move> check_castle(const Board& board, const Color color);
+
+    static bool king_in_check(const Board& board, const Color color);
+
+    static bool king_in_checkmate(const Board& board, const Color color);
 };
 
 #endif

@@ -27,47 +27,49 @@ bool BasePiece::can_move(const Board& board, const Location& dest) const {
     return can_move(board, dest.rank(), dest.file());
 }
 
-vec_uptr<Move> BasePiece::check_path(const Board& board, const int dr, const int df) const {
-    vec_uptr<Move> moves;
+std::vector<Location> BasePiece::check_path(const Board& board, const int dr, const int df) const {
+    std::vector<Location> locs;
     auto rank = _location.rank() + dr;
     auto file = _location.file() + df;
     while (can_move(board, rank, file)) {
-        moves.push_back(std::make_unique<BasicMove>(_color, _location, Location(rank, file)));
+        locs.emplace_back(rank, file);
 
         rank += dr;
         file += df;
     }
     if (can_capture(board, rank, file)) {
-        moves.push_back(std::make_unique<CaptureMove>(_color, _location, Location(rank, file)));
+        locs.emplace_back(rank, file);
     }
-    return moves;
+    return locs;
 }
 
-vec_uptr<Move> BasePiece::check_diagonals(const Board& board) const {
-    vec_uptr<Move> moves;
+std::vector<Location> BasePiece::check_diagonals(const Board& board) const {
+    std::vector<Location> locs;
     const auto& d = { 1, -1 };
     for (const auto& dr : d) {
         for (const auto& df : d) {
-            STL_Helper::merge_vectors(moves, check_path(board, dr, df));
+            STL_Helper::append_vectors(locs, check_path(board, dr, df));
         }
     }
-    return moves;
+    return locs;
 }
 
-vec_uptr<Move> BasePiece::check_across(const Board& board) const {
-    vec_uptr<Move> moves;
+std::vector<Location> BasePiece::check_across(const Board& board) const {
+    std::vector<Location> locs;
     const auto& d = { 1, -1 };
     for (const auto& dr : d) {
-        STL_Helper::merge_vectors(moves, check_path(board, dr, 0));
+        STL_Helper::append_vectors(locs, check_path(board, dr, 0));
     }
     for (const auto& df : d) {
-        STL_Helper::merge_vectors(moves, check_path(board, 0, df));
+        STL_Helper::append_vectors(locs, check_path(board, 0, df));
     }
-    return moves;
+    return locs;
 }
 
-vec_uptr<Move> BasePiece::possible_moves(const Board& board) const {
-    auto moves = possible_moves_no_check(board);
+vec_uptr<Move> BasePiece::legal_moves(const Board& board) const {
+    const auto& locs = line_of_sight(board);
+
+    vec_uptr<Move> moves;
 
     CastleVisitor castler(_color);
     board.visit_pieces(castler);
@@ -77,3 +79,4 @@ vec_uptr<Move> BasePiece::possible_moves(const Board& board) const {
 
     return moves;
 }
+

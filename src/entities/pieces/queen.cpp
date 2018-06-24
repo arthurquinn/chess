@@ -7,11 +7,11 @@
 template<typename T>
 using vec_uptr = Piece::vec_uptr<T>;
 
-vec_uptr<Move> Queen::possible_moves_no_check(const Board& board) const {
-    vec_uptr<Move> moves;
-    STL_Helper::merge_vectors(moves, check_across(board));
-    STL_Helper::merge_vectors(moves, check_diagonals(board));
-    return moves;
+std::vector<Location> Queen::line_of_sight(const Board& board) const {
+    std::vector<Location> locs;
+    STL_Helper::append_vectors(locs, check_across(board));
+    STL_Helper::append_vectors(locs, check_diagonals(board));
+    return locs;
 }
 
 void Queen::print(std::ostream& os) const {

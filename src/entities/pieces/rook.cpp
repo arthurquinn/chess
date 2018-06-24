@@ -11,7 +11,7 @@ using vec_uptr = Piece::vec_uptr<T>;
 using CastleState = Rook::CastleState;
 using Color = Piece::Color;
 
-vec_uptr<Move> Rook::possible_moves_no_check(const Board& board) const {
+std::vector<Location> Rook::line_of_sight(const Board& board) const {
     return check_across(board);
 }
 

@@ -17,9 +17,9 @@ protected:
     Color _color;
     Location _location;
 
-    vec_uptr<Move> check_path(const Board& board, const int dr, const int df) const;
-    vec_uptr<Move> check_diagonals(const Board& board) const;
-    vec_uptr<Move> check_across(const Board& board) const;
+    std::vector<Location> check_path(const Board& board, const int dr, const int df) const;
+    std::vector<Location> check_diagonals(const Board& board) const;
+    std::vector<Location> check_across(const Board& board) const;
 
     bool can_capture(const Board& board, const int rank, const int file) const;
     bool can_capture(const Board& board, const Location& dest) const;
@@ -43,7 +43,9 @@ public:
 
     inline virtual Color get_color() const override { return _color; }
 
-    vec_uptr<Move> possible_moves(const Board& board) const override;
+    virtual vec_uptr<Move> legal_moves(const Board& board) const override;
+
+    virtual std::vector<Location> line_of_sight(const Board& board) const = 0;
 };
 
 #endif

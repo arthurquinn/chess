@@ -6,15 +6,16 @@
 #include "entities/pieces/queen.h"
 #include "entities/pieces/rook.h"
 
+#include <algorithm>
+
 void InCheckVisitor::visit(const Bishop& piece) {
-    if (piece.is_adversary(_color)) {
 
-
-    }
 }
 
 void InCheckVisitor::visit(const King& piece) {
-
+    if (piece.is_allied(_color)) {
+        
+    }
 }
 
 void InCheckVisitor::visit(const Knight& piece) {

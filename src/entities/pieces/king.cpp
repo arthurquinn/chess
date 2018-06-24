@@ -5,13 +5,15 @@
 #include "helpers/stl_helper.h"
 #include "interfaces/visitors/piece_visitor.h"
 
+#include <algorithm>
+
 template<typename T>
 using vec_uptr = Piece::vec_uptr<T>;
 
 using CastleState = King::CastleState;
 
-vec_uptr<Move> King::possible_moves_no_check(const Board& board) const {
-    vec_uptr<Move> moves;
+std::vector<Location> King::line_of_sight(const Board& board) const {
+    std::vector<Location> locs;
     const auto& d = { -1, 0, 1 };
     for (const auto& dr : d) {
         for (const auto& df : d) {
@@ -20,27 +22,15 @@ vec_uptr<Move> King::possible_moves_no_check(const Board& board) const {
             const auto& rank = _location.rank() + dr;
             const auto& file = _location.file() + df;
             if (can_move(board, rank, file)) {
-                moves.push_back(std::make_unique<BasicMove>(_color, _location, Location(rank, file)));
+                locs.emplace_back(rank, file);
             }
             else if (can_capture(board, rank, file)) {
-                moves.push_back(std::make_unique<CaptureMove>(_color, _location, Location(rank, file)));
+                locs.emplace_back(rank, file);
             }
         }
     }
-    return moves;
+    return locs;
 }
-
-// TODO: fixme
-// bool King::in_check(const Board& board) const {
-//     const auto& adv_locs = board.piece_locations(adversarial_color(_color));
-//     for (const auto& loc : adv_locs) {
-//         const auto& adv_moves = board.at(loc).possible_moves_no_check(board);
-//         if (STL_Helper::vector_contains(adv_moves, _location)) {
-//             return true;
-//         }
-//     }
-//     return false;
-// }
 
 void King::print(std::ostream& os) const {
     common_print(os, 'k');
@@ -54,10 +44,13 @@ void King::accept(PieceVisitor& visitor) const {
     visitor.visit(*this);
 }
 
+// TODO: rename to castle_position()
 CastleState King::castle_state() const {
     return _was_moved ? CastleState::CANNOT_CASTLE : CastleState::IN_POSITION;
 }
 
 bool King::in_check(const Board& board) const {
-    
+    return board.any([this, &board] (const auto& piece) {
+        return piece.is_adversary(_color) && piece.in_line_of_sight(_location, board);
+    });
 }

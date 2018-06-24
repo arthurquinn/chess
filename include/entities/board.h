@@ -7,6 +7,7 @@
 
 #include <memory>
 #include <array>
+#include <functional>
 
 class PieceVisitor;
 
@@ -66,6 +67,18 @@ public:
 
     inline const Piece& at(const Location& location) const {
         return at(location.rank(), location.file());
+    }
+
+    template<typename Func>
+    bool any(const Func& predicate) const {
+        for (const auto& row : _board) {
+            for (const auto& data : row) {
+                if (data && predicate(*data)) {
+                    return true;
+                } 
+            }
+        }
+        return false;
     }
 
     void setup();

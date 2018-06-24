@@ -7,19 +7,19 @@
 template<typename T>
 using vec_uptr = Piece::vec_uptr<T>;
 
-vec_uptr<Move> Pawn::possible_moves_no_check(const Board& board) const {
-    vec_uptr<Move> moves;
+std::vector<Location> Pawn::line_of_sight(const Board& board) const {
+    std::vector<Location> locs;
 
     const auto& dr = move_direction();
     const auto& rank = _location.rank();
     const auto& file = _location.file();
 
     if ( board.in_bounds(rank + dr, file) && board.empty(rank + dr, file) ) {
-        moves.push_back(std::make_unique<BasicMove>(_color, _location, Location(rank + dr, file)));
+        locs.emplace_back(rank + dr, file);
     }
 
     if ( !_was_moved && ( board.in_bounds(rank + dr * 2, file) && board.empty(rank + dr * 2, file) ) ) {
-        moves.push_back(std::make_unique<BasicMove>(_color, _location, Location(rank + dr *2, file)));
+        locs.emplace_back(rank + dr *2, file);
     }
 
     for (const auto& df : { -1, 1 }) {
@@ -28,10 +28,10 @@ vec_uptr<Move> Pawn::possible_moves_no_check(const Board& board) const {
                     board.occupied(attack_loc) &&
                     board.at(attack_loc).is_adversary(_color)) {
 
-            moves.push_back(std::make_unique<CaptureMove>(_color, _location, attack_loc));
+            locs.push_back(attack_loc);
         }
     }
-    return moves;
+    return locs;
 }
 
 void Pawn::print(std::ostream& os) const {

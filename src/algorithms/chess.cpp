@@ -9,6 +9,8 @@
 template<typename T>
 using vec_uptr = Chess::vec_uptr<T>;
 
+using Color = Piece::Color;
+
 bool Chess::can_kingside_castle(const Board& board, const King& king, const Rook& rook) {
     std::vector<Location> check_locs;
     check_locs.emplace_back(rook.starting_rank(), 5);
@@ -67,5 +69,13 @@ vec_uptr<Move> Chess::check_castle(const Board& board, const Color color) {
         }
     }
     return moves;
+}
+
+bool Chess::king_in_check(const Board& board, const Color color) {
+
+}
+
+bool Chess::king_in_checkmate(const Board& board, const Color color) {
+
 }
 

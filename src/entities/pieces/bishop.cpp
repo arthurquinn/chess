@@ -6,7 +6,7 @@
 template<typename T>
 using vec_uptr = Piece::vec_uptr<T>;
 
-vec_uptr<Move> Bishop::possible_moves_no_check(const Board& board) const {
+std::vector<Location> Bishop::line_of_sight(const Board& board) const {
     return check_diagonals(board);
 }
 

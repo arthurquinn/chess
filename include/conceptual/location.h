@@ -15,6 +15,8 @@ public:
 
     inline unsigned int rank() const { return _rank; }
     inline unsigned int file() const { return _file; }
+
+    bool operator==(const Location& other) const { return _rank == other._rank && _file == other._file; }
 };
 
 #endif

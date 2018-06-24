@@ -18,19 +18,19 @@ const std::array<std::pair<int, int>, 8> Knight::L_MOVES = {
     std::make_pair(-2, -1)
 };
 
-vec_uptr<Move> Knight::possible_moves_no_check(const Board& board) const {
-    vec_uptr<Move> moves;
+std::vector<Location> Knight::line_of_sight(const Board& board) const {
+    std::vector<Location> locs;
     for (const auto& l : L_MOVES) {
         const auto& rank = _location.rank() + l.first;
         const auto& file = _location.file() + l.second;
         if (can_move(board, rank, file)) {
-            moves.push_back(std::make_unique<BasicMove>(_color, _location, Location(rank, file)));
+            locs.emplace_back(rank, file);
         }
         else if (can_capture(board, rank, file)) {
-            moves.push_back(std::make_unique<CaptureMove>(_color, _location, Location(rank, file)));
+            locs.emplace_back(rank, file);
         }
     }
-    return moves;
+    return locs;
 }
 
 void Knight::print(std::ostream& os) const {
