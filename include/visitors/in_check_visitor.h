@@ -15,12 +15,15 @@ public:
     };
 
 private:
+    const Board& _board;
     const Color _color;
+
     InCheckState _in_check_state { InCheckState::UNDETERMINED };
 
 public:
     InCheckVisitor() = delete;
-    InCheckVisitor(const Color color) : _color(color) {  }
+    InCheckVisitor(const Board& board, const Color color) :
+            _board(board), _color(color) {  }
 
     virtual ~InCheckVisitor() = default;
 
@@ -30,6 +33,8 @@ public:
     virtual void visit(const Pawn& piece) override;
     virtual void visit(const Queen& piece) override;
     virtual void visit(const Rook& piece) override;
+
+    inline InCheckState in_check_state() const { return _in_check_state; }
 };
 
 #endif

@@ -9,27 +9,31 @@
 #include <algorithm>
 
 void InCheckVisitor::visit(const Bishop& piece) {
-
+    (void)piece;
 }
 
 void InCheckVisitor::visit(const King& piece) {
     if (piece.is_allied(_color)) {
-        
+        if (piece.in_check(_board)) {
+            _in_check_state = InCheckState::KING_IN_CHECK;
+        } else {
+            _in_check_state = InCheckState::KING_NOT_IN_CHECK;
+        }
     }
 }
 
 void InCheckVisitor::visit(const Knight& piece) {
-
+    (void)piece;
 }
 
 void InCheckVisitor::visit(const Pawn& piece) {
-
+    (void)piece;
 }
 
 void InCheckVisitor::visit(const Queen& piece) {
-
+    (void)piece;
 }
 
 void InCheckVisitor::visit(const Rook& piece) {
-
+    (void)piece;
 }

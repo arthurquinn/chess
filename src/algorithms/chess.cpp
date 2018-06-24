@@ -1,5 +1,6 @@
 #include "algorithms/chess.h"
 #include "visitors/castle_visitor.h"
+#include "visitors/in_check_visitor.h"
 #include "interfaces/piece.h"
 #include "entities/board.h"
 #include "entities/pieces/king.h"
@@ -72,7 +73,20 @@ vec_uptr<Move> Chess::check_castle(const Board& board, const Color color) {
 }
 
 bool Chess::king_in_check(const Board& board, const Color color) {
+    InCheckVisitor checker(board, color);
+    board.visit_pieces(checker);
 
+    switch (checker.in_check_state()) {
+    case InCheckVisitor::InCheckState::KING_IN_CHECK:
+        return true;
+    
+    case InCheckVisitor::InCheckState::KING_NOT_IN_CHECK:
+        return false;
+
+    default:
+        // TODO: some error
+        return false;
+    }
 }
 
 bool Chess::king_in_checkmate(const Board& board, const Color color) {
