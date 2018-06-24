@@ -14,7 +14,7 @@ void CastleVisitor::visit(const Bishop& piece) {
 }
 
 void CastleVisitor::visit(const King& piece) {
-    if (piece.is_allied(_color) && piece.castle_state() == King::CastleState::IN_POSITION) {
+    if (piece.is_allied(_color) && piece.in_castle_position() == King::CastlePosition::IN_POSITION) {
         _king = &piece;
     }
 }
@@ -33,13 +33,13 @@ void CastleVisitor::visit(const Queen& piece) {
 
 void CastleVisitor::visit(const Rook& piece) {
     if (piece.is_allied(_color)) {
-        switch (piece.castle_state()) {
+        switch (piece.in_castle_position()) {
 
-        case Rook::CastleState::IN_POSITION_KINGSIDE:
+        case Rook::CastlePosition::IN_POSITION_KINGSIDE:
             _kingside_rook = &piece;
             break;
 
-        case Rook::CastleState::IN_POSITION_QUEENSIDE:
+        case Rook::CastlePosition::IN_POSITION_QUEENSIDE:
             _queenside_rook = &piece;
             break;
 

@@ -11,8 +11,8 @@ class Rook : public BasePiece {
 public:
     using Color = BasePiece::Color;
 
-    enum class CastleState {
-        CANNOT_CASTLE,
+    enum class CastlePosition {
+        NOT_IN_POSITION,
         IN_POSITION_QUEENSIDE,
         IN_POSITION_KINGSIDE
     };
@@ -53,7 +53,7 @@ public:
         return !_was_moved && _location.rank() == starting_rank() && _location.file() == QUEENSIDE_FILE;
     }
 
-    CastleState castle_state() const;
+    CastlePosition in_castle_position() const;
 };
 
 #endif

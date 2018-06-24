@@ -8,7 +8,7 @@
 template<typename T>
 using vec_uptr = Piece::vec_uptr<T>;
 
-using CastleState = Rook::CastleState;
+using CastlePosition = Rook::CastlePosition;
 using Color = Piece::Color;
 
 std::vector<Location> Rook::line_of_sight(const Board& board) const {
@@ -37,14 +37,14 @@ unsigned int Rook::starting_rank() const {
     }
 }
 
-CastleState Rook::castle_state() const {
+CastlePosition Rook::in_castle_position() const {
     if (is_kingside()) {
-        return CastleState::IN_POSITION_KINGSIDE;
+        return CastlePosition::IN_POSITION_KINGSIDE;
     }
     if (is_queenside()) {
-        return CastleState::IN_POSITION_QUEENSIDE;
+        return CastlePosition::IN_POSITION_QUEENSIDE;
     }
-    return CastleState::CANNOT_CASTLE;
+    return CastlePosition::NOT_IN_POSITION;
 }
 
 void Rook::accept(PieceVisitor& visitor) const {

@@ -10,7 +10,7 @@
 template<typename T>
 using vec_uptr = Piece::vec_uptr<T>;
 
-using CastleState = King::CastleState;
+using CastlePosition = King::CastlePosition;
 
 std::vector<Location> King::line_of_sight(const Board& board) const {
     std::vector<Location> locs;
@@ -44,9 +44,8 @@ void King::accept(PieceVisitor& visitor) const {
     visitor.visit(*this);
 }
 
-// TODO: rename to castle_position()
-CastleState King::castle_state() const {
-    return _was_moved ? CastleState::CANNOT_CASTLE : CastleState::IN_POSITION;
+CastlePosition King::in_castle_position() const {
+    return _was_moved ? CastlePosition::NOT_IN_POSITION : CastlePosition::IN_POSITION;
 }
 
 bool King::in_check(const Board& board) const {
