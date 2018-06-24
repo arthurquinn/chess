@@ -5,6 +5,7 @@
 #include "visitors/castle_visitor.h"
 #include "conceptual/moves/basic_move.h"
 #include "conceptual/moves/capture_move.h"
+#include "algorithms/chess.h"
 
 template<typename T>
 using vec_uptr = Piece::vec_uptr<T>;
@@ -67,15 +68,20 @@ std::vector<Location> BasePiece::check_across(const Board& board) const {
 }
 
 vec_uptr<Move> BasePiece::legal_moves(const Board& board) const {
-    const auto& locs = line_of_sight(board);
-
     vec_uptr<Move> moves;
 
-    CastleVisitor castler(_color);
-    board.visit_pieces(castler);
+    for (const auto& loc : line_of_sight(board)) {
+        auto simulation = board;
+        simulation.move(_location, loc);
 
-    // TODO: implement
-    // STL_Helper::append_vectors(moves, castler.evaluate(board));
+        if (!Chess::king_in_check(simulation, _color)) {
+            if (board.empty(loc)) {
+                moves.push_back(std::make_unique<BasicMove>(_color, _location, loc));
+            } else {
+                moves.push_back(std::make_unique<CaptureMove>(_color, _location, loc));
+            }
+        }
+    }
 
     return moves;
 }
